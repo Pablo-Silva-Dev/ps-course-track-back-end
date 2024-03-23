@@ -1,0 +1,94 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @default(uuid())
+  name         String
+  cpf          String       @unique
+  email        String       @unique
+  phone        String       @unique
+  password     String
+  courses      Course[]     @relation("UserCourses")
+  commentaries Commentary[]
+  UserCourse   UserCourse[]
+}
+
+model Course {
+  id           String       @id @default(uuid())
+  name         String       @unique
+  description  String
+  duration     Int
+  cover_url    String
+  users        User[]       @relation("UserCourses")
+  modules      Module[]
+  commentaries Commentary[]
+  UserCourse   UserCourse[]
+  classes        Class[]
+}
+
+model Module {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String
+  duration    Int
+  cover_url   String
+  courseId    String
+  course      Course  @relation(fields: [courseId], references: [id])
+  classes     Class[]
+}
+
+model Tutor {
+  id      String  @id @default(uuid())
+  name    String  @unique
+  bio     String
+  classes Class[]
+}
+
+model Class {
+  id           String       @id @default(uuid())
+  name         String       @unique
+  description  String
+  duration     Int
+  url          String
+  moduleId     String
+  module       Module       @relation(fields: [moduleId], references: [id])
+  tutorId      String
+  tutor        Tutor        @relation(fields: [tutorId], references: [id])
+  courseId     String
+  course       Course       @relation(fields: [courseId], references: [id])
+  commentaries Commentary[]
+}
+
+model Commentary {
+  id       String @id @default(uuid())
+  content  String
+  userId   String
+  user     User   @relation(fields: [userId], references: [id])
+  classId  String
+  class    Class  @relation(fields: [classId], references: [id])
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id])
+}
+
+model UserCourse {
+  userId   String
+  courseId String
+  user     User   @relation(fields: [userId], references: [id])
+  course   Course @relation(fields: [courseId], references: [id])
+
+  @@id([userId, courseId])
+}
+
+model AppVersion {
+  id String @id @default(uuid())
+  appVersion String
+  availableOniOS Boolean
+  availableOnAndroid Boolean
+}
