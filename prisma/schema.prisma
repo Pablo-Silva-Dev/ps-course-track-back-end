@@ -18,6 +18,8 @@ model User {
   courses      Course[]     @relation("UserCourses")
   commentaries Commentary[]
   UserCourse   UserCourse[]
+  userMetrics UserMetrics?
+  watchedClasses UserWatchedClasses[]
 }
 
 model Course {
@@ -31,6 +33,7 @@ model Course {
   commentaries Commentary[]
   UserCourse   UserCourse[]
   classes        Class[]
+  userMetrics UserMetrics?
 }
 
 model Module {
@@ -64,6 +67,7 @@ model Class {
   courseId     String
   course       Course       @relation(fields: [courseId], references: [id])
   commentaries Commentary[]
+  watchedByUsers UserWatchedClasses[]
 }
 
 model Commentary {
@@ -91,4 +95,24 @@ model AppVersion {
   appVersion String
   availableOniOS Boolean
   availableOnAndroid Boolean
+}
+
+model UserMetrics{
+  id String @id @default(uuid())
+  userId String @unique
+  user User? @relation(fields: [userId], references: [id])
+  courseId String @unique
+  course Course? @relation(fields: [courseId], references: [id])
+  courseTotalClasses Int
+  totalWatchedClasses Int
+  totalWatchedClassesPercentage Int
+}
+
+model UserWatchedClasses {
+  id String @id @default(uuid())
+  userId String
+  classId String
+  watchedAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  class Class @relation(fields: [classId], references: [id])
 }
