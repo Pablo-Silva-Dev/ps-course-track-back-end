@@ -9,7 +9,7 @@ const getUserCourseMetricsBodySchema = z.object({
 
 type GetUserCourseMetricsBodySchema = z.infer<typeof getUserCourseMetricsBodySchema>;
 
-@Controller("/user-metrics/get-unique")
+@Controller("/user-course-metrics/get-unique")
 export class GetUserCourseMetricsController {
   constructor(private prisma: PrismaService) {}
   @Post()

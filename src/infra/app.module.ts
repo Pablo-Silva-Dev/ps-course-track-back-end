@@ -27,6 +27,9 @@ import { DeleteTutorController } from "./controllers/tutors/delete_tutor";
 import { GetTutorController } from "./controllers/tutors/get_tutor";
 import { ListTutorsController } from "./controllers/tutors/list_tutors";
 import { UpdateTutorController } from "./controllers/tutors/update_tutor";
+import { CreateUserCourseMetricsController } from "./controllers/userCourseMetrics/create_user_course_metrics";
+import { GetUserCourseMetricsController } from "./controllers/userCourseMetrics/get_user_course_metrics";
+import { UpdateUserCourseMetricsController } from "./controllers/userCourseMetrics/update_user_course_metrics";
 import { CreateUserController } from "./controllers/users/create_user";
 import { DeleteUserController } from "./controllers/users/delete_user";
 import { GetUserController } from "./controllers/users/get_user";
@@ -76,6 +79,9 @@ import { PrismaService } from "./services/prismaService";
     WatchClassesController,
     UnwatchClassesController,
     FetchClassController,
+    CreateUserCourseMetricsController,
+    UpdateUserCourseMetricsController,
+    GetUserCourseMetricsController,
   ],
   providers: [PrismaService],
 })
