@@ -109,10 +109,10 @@ model UserMetrics{
 }
 
 model UserWatchedClasses {
-  id String @id @default(uuid())
   userId String
   classId String
   watchedAt DateTime @default(now())
   user User @relation(fields: [userId], references: [id])
   class Class @relation(fields: [classId], references: [id])
+  @@id([userId, classId])
 }

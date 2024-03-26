@@ -1,4 +1,7 @@
 import { Module } from "@nestjs/common";
+import { CreateAppVersionController } from "./controllers/appVersion/create_app_version";
+import { GetAppVersionController } from "./controllers/appVersion/get_app_version";
+import { UpdateAppVersionController } from "./controllers/appVersion/update_app_version";
 import { CreateClassController } from "./controllers/classes/create_class";
 import { DeleteClassController } from "./controllers/classes/delete_class";
 import { GetClassController } from "./controllers/classes/get_class";
@@ -8,6 +11,7 @@ import { CreateCommentaryController } from "./controllers/commentaries/create_co
 import { DeleteCommentaryController } from "./controllers/commentaries/delete_commentary";
 import { GetCommentaryController } from "./controllers/commentaries/get_commentary";
 import { ListCommentariesController } from "./controllers/commentaries/list_commentaries";
+import { UpdateCommentaryController } from "./controllers/commentaries/update_commentary";
 import { CreateCourseController } from "./controllers/courses/create_course";
 import { DeleteCourseController } from "./controllers/courses/delete_course";
 import { GetCourseController } from "./controllers/courses/get_course";
@@ -28,11 +32,10 @@ import { DeleteUserController } from "./controllers/users/delete_user";
 import { GetUserController } from "./controllers/users/get_user";
 import { ListUsersController } from "./controllers/users/list_users";
 import { UpdateUserController } from "./controllers/users/update_user";
+import { FetchClassController } from "./controllers/watchedClasses/fetch_watched_class";
+import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_class";
+import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
 import { PrismaService } from "./services/prismaService";
-import { UpdateCommentaryController } from "./controllers/commentaries/update_commentary";
-import { CreateAppVersionController } from "./controllers/appVersion/create_app_version";
-import { GetAppVersionController } from "./controllers/appVersion/get_app_version";
-import { UpdateAppVersionController } from "./controllers/appVersion/update_app_version";
 
 @Module({
   controllers: [
@@ -69,7 +72,10 @@ import { UpdateAppVersionController } from "./controllers/appVersion/update_app_
     UpdateCommentaryController,
     CreateAppVersionController,
     GetAppVersionController,
-    UpdateAppVersionController
+    UpdateAppVersionController,
+    WatchClassesController,
+    UnwatchClassesController,
+    FetchClassController,
   ],
   providers: [PrismaService],
 })
