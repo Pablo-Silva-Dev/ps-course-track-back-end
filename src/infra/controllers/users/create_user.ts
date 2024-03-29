@@ -21,7 +21,13 @@ export class CreateUserController {
     const { name, email, cpf, phone, password } =
       createUserBodySchema.parse(body);
 
-      const user = await this.createUserUseCase.execute({name, email, cpf, phone, password})
-      return user
+    const user = await this.createUserUseCase.execute({
+      name,
+      email,
+      cpf,
+      phone,
+      password,
+    });
+    return user;
   }
 }
