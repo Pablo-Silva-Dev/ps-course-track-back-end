@@ -5,7 +5,7 @@ import { UserMetrics } from "./UserMetrics";
 import { UserWatchedClasses } from "./UserWatchedClasses";
 
 export interface User {
-  id: string;
+  id?: string;
   name: string;
   cpf: string;
   email: string;
