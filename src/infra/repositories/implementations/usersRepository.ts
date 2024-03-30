@@ -17,8 +17,13 @@ export class UsersRepository implements IUsersRepository {
       },
     });
   }
-  listUsers(): Promise<User[]> {
-    throw new Error("Method not implemented.");
+  async listUsers(): Promise<User[]> {
+    const users = await this.prisma.user.findMany({
+   include:{
+    commentaries: true
+   }
+    })
+    return users as never
   }
   async getUserById(userId: string): Promise<void | User> {
     const user = await this.prisma.user.findUnique({

@@ -41,6 +41,7 @@ import { WatchClassesController } from "./controllers/watchedClasses/watch_class
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { PrismaService } from "./services/prismaService";
 import { CreateUserUseCase } from "./useCases/createUserUseCase";
+import { ListUsersUseCase } from "./useCases/listUsersUseCase";
 @Module({
   controllers: [
     CreateCourseController,
@@ -84,6 +85,11 @@ import { CreateUserUseCase } from "./useCases/createUserUseCase";
     UpdateUserCourseMetricsController,
     GetUserCourseMetricsController,
   ],
-  providers: [PrismaService, CreateUserUseCase, UsersRepository],
+  providers: [
+    PrismaService,
+    CreateUserUseCase,
+    UsersRepository,
+    ListUsersUseCase,
+  ],
 })
 export class AppModule {}

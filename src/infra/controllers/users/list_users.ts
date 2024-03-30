@@ -1,17 +1,13 @@
 import { Controller, Get, HttpCode } from "@nestjs/common";
-import { PrismaService } from "../../services/prismaService";
+import { ListUsersUseCase } from "src/infra/useCases/listUsersUseCase";
 
 @Controller("/users")
 export class ListUsersController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private listUsersUseCase: ListUsersUseCase) {}
   @Get()
   @HttpCode(200)
   async handle() {
-    const users = await this.prisma.user.findMany({
-      include:{
-        commentaries: true
-      }
-    });
+    const users = await this.listUsersUseCase.execute();
     return users;
   }
 }
