@@ -4,39 +4,35 @@ import {
   Controller,
   Get,
   HttpCode,
-  NotFoundException,
 } from "@nestjs/common";
+import { GetUserUseCase } from "src/infra/useCases/getUserUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const getUserBodySchema = z.object({
-  userId: z.string(),
+  userId: z.string().optional(),
 });
 
 type GetUserBodySchema = z.infer<typeof getUserBodySchema>;
 
 @Controller("/users/getUnique")
 export class GetUserController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private getUserUseCase: GetUserUseCase) {}
   @Get()
   @HttpCode(200)
   async handle(@Body() body: GetUserBodySchema) {
-    const { userId } = body;
+    const isBodyValidated = getUserBodySchema.safeParse(body);
+
+    if (!isBodyValidated) {
+      throw new ConflictException("Invalid request body");
+    }
+
+    const { userId } = getUserBodySchema.parse(body);
 
     if (!userId) {
       throw new ConflictException("userId is required");
     }
 
-    const user = await this.prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    });
-
-    if (!user) {
-      throw new NotFoundException("No user found for the provided userId");
-    }
-
+    const user = await this.getUserUseCase.execute(userId);
     return user;
   }
 }
