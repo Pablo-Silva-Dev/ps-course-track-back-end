@@ -23,7 +23,9 @@ export class GetUserController {
     const isBodyValidated = getUserBodySchema.safeParse(body);
 
     if (!isBodyValidated) {
-      throw new ConflictException("Invalid request body");
+      throw new ConflictException(
+        "Invalid request body. Check if all fields are informed."
+      );
     }
 
     const { userId } = getUserBodySchema.parse(body);
