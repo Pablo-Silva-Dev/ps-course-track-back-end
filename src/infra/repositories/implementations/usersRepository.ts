@@ -19,11 +19,11 @@ export class UsersRepository implements IUsersRepository {
   }
   async listUsers(): Promise<User[]> {
     const users = await this.prisma.user.findMany({
-   include:{
-    commentaries: true
-   }
-    })
-    return users as never
+      include: {
+        commentaries: true,
+      },
+    });
+    return users as never;
   }
   async getUserById(userId: string): Promise<void | User> {
     const user = await this.prisma.user.findUnique({
@@ -64,7 +64,19 @@ export class UsersRepository implements IUsersRepository {
   ): Promise<void> {
     throw new Error("Method not implemented.");
   }
-  deleteUser(userId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteUser(userId: string): Promise<void> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (user) {
+      await this.prisma.user.delete({
+        where: {
+          id: userId,
+        },
+      });
+    }
   }
 }

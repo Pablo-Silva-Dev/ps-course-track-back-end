@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { UsersRepository } from "../repositories/implementations/usersRepository";
 
 @Injectable()
-export class GetUserUseCase {
+export class DeleteUserUseCase {
   constructor(private usersRepository: UsersRepository) {}
   async execute(userId: string) {
     const user = await this.usersRepository.getUserById(userId);
@@ -11,6 +11,6 @@ export class GetUserUseCase {
       throw new NotFoundException("No user found for the provided userId");
     }
 
-    return user;
+    await this.usersRepository.deleteUser(userId);
   }
 }
