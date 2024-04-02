@@ -5,7 +5,7 @@ import {
   Delete,
   HttpCode,
 } from "@nestjs/common";
-import { DeleteUserUseCase } from "src/infra/useCases/deleteUserUseCase";
+import { DeleteUserUseCase } from "src/infra/useCases/users/deleteUserUseCase";
 import { z } from "zod";
 
 const deleteUserBodySchema = z.object({

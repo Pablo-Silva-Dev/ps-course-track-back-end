@@ -1,7 +1,7 @@
 import { ConflictException, Injectable } from "@nestjs/common";
 import { hash } from "bcryptjs";
-import { User } from "../entities/User";
-import { UsersRepository } from "../repositories/implementations/usersRepository";
+import { User } from "../../entities/User";
+import { UsersRepository } from "../../repositories/implementations/usersRepository";
 
 const PASSWORD_ENCRYPTION_SALT_LEVEL = 6;
 

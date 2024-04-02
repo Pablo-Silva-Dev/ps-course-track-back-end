@@ -40,10 +40,10 @@ import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_c
 import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { PrismaService } from "./services/prismaService";
-import { CreateUserUseCase } from "./useCases/createUserUseCase";
-import { GetUserUseCase } from "./useCases/getUserUseCase";
-import { ListUsersUseCase } from "./useCases/listUsersUseCase";
-import { DeleteUserUseCase } from "./useCases/deleteUserUseCase";
+import { CreateUserUseCase } from "./useCases/users/createUserUseCase";
+import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
+import { GetUserUseCase } from "./useCases/users/getUserUseCase";
+import { ListUsersUseCase } from "./useCases/users/listUsersUseCase";
 @Module({
   controllers: [
     CreateCourseController,

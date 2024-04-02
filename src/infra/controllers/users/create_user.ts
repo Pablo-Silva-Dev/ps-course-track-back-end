@@ -6,7 +6,7 @@ import {
   Post,
 } from "@nestjs/common";
 import { z } from "zod";
-import { CreateUserUseCase } from "../../useCases/createUserUseCase";
+import { CreateUserUseCase } from "../../useCases/users/createUserUseCase";
 
 const createUserBodySchema = z.object({
   name: z.string().optional(),

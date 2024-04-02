@@ -5,7 +5,7 @@ import {
   Get,
   HttpCode,
 } from "@nestjs/common";
-import { GetUserUseCase } from "src/infra/useCases/getUserUseCase";
+import { GetUserUseCase } from "src/infra/useCases/users/getUserUseCase";
 import { z } from "zod";
 
 const getUserBodySchema = z.object({
