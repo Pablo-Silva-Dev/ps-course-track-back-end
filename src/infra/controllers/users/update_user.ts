@@ -3,60 +3,38 @@ import {
   ConflictException,
   Controller,
   HttpCode,
-  Param,
   Put,
-  NotFoundException
 } from "@nestjs/common";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
-import {hash} from 'bcryptjs'
+import { UpdateUserUseCase } from "../../useCases/users/updateUserUseCase";
 
 const updateUserBodySchema = z.object({
-  name: z.string(),
-  phone: z.string(),
-  password: z.string(),
+  userId: z.string().optional(),
+  password: z.string().optional(),
 });
 
 type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>;
 
-const PASSWORD_ENCRYPTION_SALT_LEVEL = 6
-
 @Controller("/users")
 export class UpdateUserController {
-  constructor(private prisma: PrismaService) {}
-  @Put(":userId")
+  constructor(private updateUserUseCase: UpdateUserUseCase) {}
+  @Put()
   @HttpCode(203)
-  async handle(
-    @Body() body: UpdateUserBodySchema,
-    @Param("userId") userId: string
-  ) {
-    const { phone, name, password } = body;
+  async execute(@Body() body: UpdateUserBodySchema) {
+    const isBodyParsed = updateUserBodySchema.safeParse(body);
 
-    if (!userId) {
-      throw new ConflictException("userId is required");
+    const { userId, password } = updateUserBodySchema.parse(body);
+
+    if (!isBodyParsed || !password || !userId) {
+      throw new ConflictException(
+        "Invalid request body. Check if all fields are informed."
+      );
     }
 
-    const user = await this.prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    });
-
-    if (!user) {
-      throw new NotFoundException("User not found");
+    try {
+      await this.updateUserUseCase.execute(userId, password);
+    } catch (error) {
+      console.log(error);
     }
-
-    const encryptedPassword = await hash(password, PASSWORD_ENCRYPTION_SALT_LEVEL)
-
-    await this.prisma.user.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        name,
-        phone,
-        password : encryptedPassword,
-      },
-    });
   }
 }

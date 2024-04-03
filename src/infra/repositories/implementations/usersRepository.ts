@@ -58,11 +58,23 @@ export class UsersRepository implements IUsersRepository {
       return user;
     }
   }
-  updateUser(
-    userId: string,
-    updateData: { name?: string; phone?: string; password?: string }
-  ): Promise<void> {
-    throw new Error("Method not implemented.");
+  async updateUser(userId: string, password: string): Promise<void> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (user) {
+      await this.prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          password,
+        },
+      });
+    }
   }
   async deleteUser(userId: string): Promise<void> {
     const user = await this.prisma.user.findUnique({

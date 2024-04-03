@@ -8,7 +8,7 @@ export interface IUsersRepository {
   getUserByCpf(userId: string): Promise<User | void>;
   updateUser(
     userId: string,
-    updateData: { name?: string; phone?: string; password?: string }
+    password: string
   ): Promise<void>;
   deleteUser(userId: string): Promise<void>;
 }
