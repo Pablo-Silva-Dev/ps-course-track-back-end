@@ -7,18 +7,14 @@ import { ITutorsRepository } from "../interfaces/tutorsRepository";
 export class TutorsRepository implements ITutorsRepository {
   constructor(private prisma: PrismaService) {}
   async createTutor({ name, bio }: Tutor): Promise<Tutor> {
-    try {
-      const tutor = await this.prisma.tutor.create({
-        data: {
-          name,
-          bio,
-        },
-      });
+    const tutor = await this.prisma.tutor.create({
+      data: {
+        name,
+        bio,
+      },
+    });
 
-      return tutor;
-    } catch (error) {
-      console.log(error);
-    }
+    return tutor;
   }
   async listTutors(): Promise<Tutor[]> {
     throw new Error("Method not implemented.");

@@ -31,10 +31,6 @@ export class UpdateUserController {
       );
     }
 
-    try {
-      await this.updateUserUseCase.execute(userId, password);
-    } catch (error) {
-      console.log(error);
-    }
+    await this.updateUserUseCase.execute(userId, password);
   }
 }
