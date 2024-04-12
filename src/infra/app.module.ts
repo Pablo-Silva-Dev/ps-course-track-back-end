@@ -38,8 +38,10 @@ import { UpdateUserController } from "./controllers/users/update_user";
 import { FetchClassController } from "./controllers/watchedClasses/fetch_watched_class";
 import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_class";
 import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
+import { TutorsRepository } from "./repositories/implementations/tutorsRepository";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { PrismaService } from "./services/prismaService";
+import { CreateTutorUseCase } from "./useCases/tutors/createTutorUseCase";
 import { CreateUserUseCase } from "./useCases/users/createUserUseCase";
 import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
@@ -95,7 +97,9 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     ListUsersUseCase,
     GetUserUseCase,
     DeleteUserUseCase,
-    UpdateUserUseCase
+    UpdateUserUseCase,
+    CreateTutorUseCase,
+    TutorsRepository,
   ],
 })
 export class AppModule {}

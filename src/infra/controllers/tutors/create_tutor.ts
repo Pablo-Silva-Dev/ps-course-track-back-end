@@ -5,39 +5,40 @@ import {
   HttpCode,
   Post,
 } from "@nestjs/common";
+import { CreateTutorUseCase } from "src/infra/useCases/tutors/createTutorUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const createTutorBodySchema = z.object({
-  name: z.string(),
-  bio: z.string(),
+  name: z.string().optional(),
+  bio: z.string().optional(),
 });
 
 type CreateTutorBodySchema = z.infer<typeof createTutorBodySchema>;
 
 @Controller("/tutors")
 export class CreateTutorController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private createTutorUseCase: CreateTutorUseCase) {}
   @Post()
   @HttpCode(201)
   async handle(@Body() body: CreateTutorBodySchema) {
+    const isBodyValidated = createTutorBodySchema.safeParse(body);
     const { name, bio } = createTutorBodySchema.parse(body);
 
-    const tutorAlreadyExists = await this.prisma.tutor.findUnique({
-      where: {
-        name,
-      },
-    });
-
-    if (tutorAlreadyExists) {
-      throw new ConflictException("Already exists a tutor with this name.");
+    if (!name) {
+      throw new ConflictException("Name is required.");
     }
 
-    await this.prisma.tutor.create({
-      data: {
-        name,
-        bio,
-      },
-    });
+    if (!bio) {
+      throw new ConflictException("Bio is required.");
+    }
+
+    if (!isBodyValidated) {
+      throw new ConflictException(
+        "Invalid request body. Check if all fields are informed."
+      );
+    }
+
+    const tutor = await this.createTutorUseCase.execute({ name, bio });
+    return tutor;
   }
 }
