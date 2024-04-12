@@ -20,10 +20,10 @@ export class TutorsRepository implements ITutorsRepository {
     const tutors = await this.prisma.tutor.findMany();
     return tutors;
   }
-  async getTutorById(id: string): Promise<void | Tutor> {
+  async getTutorById(tutorId: string): Promise<void | Tutor> {
     const tutor = await this.prisma.tutor.findUnique({
       where: {
-        id,
+        id: tutorId,
       },
     });
 
