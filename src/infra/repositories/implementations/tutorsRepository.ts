@@ -17,7 +17,8 @@ export class TutorsRepository implements ITutorsRepository {
     return tutor;
   }
   async listTutors(): Promise<Tutor[]> {
-    throw new Error("Method not implemented.");
+    const tutors = await this.prisma.tutor.findMany();
+    return tutors;
   }
   async getTutorById(id: string): Promise<void | Tutor> {
     const tutor = await this.prisma.tutor.findUnique({
