@@ -4,9 +4,10 @@ import {
   Controller,
   Delete,
   HttpCode,
+  Inject,
 } from "@nestjs/common";
+import { DeleteTutorUseCase } from "src/infra/useCases/tutors/deleteTutorUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const deleteTutorBodySchema = z.object({
   tutorId: z.string(),
@@ -16,7 +17,9 @@ type DeleteTutorBodySchema = z.infer<typeof deleteTutorBodySchema>;
 
 @Controller("/tutors")
 export class DeleteTutorController {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @Inject(DeleteTutorUseCase) private deleteTutorUseCase: DeleteTutorUseCase
+  ) {}
   @Delete()
   @HttpCode(204)
   async handle(@Body() body: DeleteTutorBodySchema) {
@@ -26,20 +29,6 @@ export class DeleteTutorController {
       throw new ConflictException("tutorId is required");
     }
 
-    const tutor = await this.prisma.tutor.findUnique({
-      where: {
-        id: tutorId,
-      },
-    });
-
-    if (!tutor) {
-      throw new ConflictException("No found a tutor with the specified id");
-    }
-
-    await this.prisma.tutor.delete({
-      where: {
-        id: tutorId,
-      },
-    });
+    await this.deleteTutorUseCase.execute(tutorId);
   }
 }
