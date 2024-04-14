@@ -50,7 +50,19 @@ export class TutorsRepository implements ITutorsRepository {
     tutorId: string,
     data: { bio: string }
   ): Promise<void | Tutor> {
-    throw new Error("Method not implemented.");
+    const tutor = await this.prisma.tutor.findUnique({
+      where: {
+        id: tutorId,
+      },
+    });
+    if (tutor) {
+      await this.prisma.tutor.update({
+        where: {
+          id: tutorId,
+        },
+        data,
+      });
+    }
   }
   async deleteTutor(tutorId: string): Promise<void> {
     const tutor = await this.prisma.tutor.findUnique({

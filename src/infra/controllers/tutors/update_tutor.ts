@@ -6,11 +6,10 @@ import {
   Param,
   Put,
 } from "@nestjs/common";
+import { UpdateTutorUseCase } from "src/infra/useCases/tutors/updateTutorUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const updateTutorBodySchema = z.object({
-  name: z.string(),
   bio: z.string(),
 });
 
@@ -18,49 +17,24 @@ type UpdateTutorBodySchema = z.infer<typeof updateTutorBodySchema>;
 
 @Controller("/tutors")
 export class UpdateTutorController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private updateTutorUseCase: UpdateTutorUseCase) {}
   @Put(":tutorId")
   @HttpCode(203)
   async handle(
     @Body() body: UpdateTutorBodySchema,
     @Param("tutorId") tutorId: string
   ) {
-    const { name, bio } = body;
+    const isBodyParsed = updateTutorBodySchema.safeParse(body);
+    const { bio } = updateTutorBodySchema.parse(body);
 
-    if (!tutorId) {
-      throw new ConflictException("tutorId is required");
-    }
-
-    const tutor = await this.prisma.tutor.findUnique({
-      where: {
-        id: tutorId,
-      },
-    });
-
-    if (!tutor) {
-      throw new ConflictException("Tutor not found");
-    }
-
-    const tutorAlreadyExists = await this.prisma.tutor.findUnique({
-      where: {
-        name,
-      },
-    });
-
-    if (tutorAlreadyExists) {
+    if (!isBodyParsed || !bio) {
       throw new ConflictException(
-        "There is already a tutor with the provided name. Please try another one."
+        "Its necessary provide a bio to update a tutor."
       );
     }
 
-    await this.prisma.tutor.update({
-      where: {
-        id: tutorId,
-      },
-      data: {
-        name,
-        bio,
-      },
+    await this.updateTutorUseCase.execute(tutorId, {
+      bio,
     });
   }
 }
