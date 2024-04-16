@@ -3,12 +3,11 @@ import {
   ConflictException,
   Controller,
   HttpCode,
-  NotFoundException,
   Param,
   Put,
 } from "@nestjs/common";
+import { UpdateCommentaryUseCase } from "src/infra/useCases/commentaries/updateCommentaryUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const updateCommentaryBodySchema = z.object({
   content: z.string(),
@@ -18,7 +17,7 @@ type UpdateCommentaryBodySchema = z.infer<typeof updateCommentaryBodySchema>;
 
 @Controller("/commentaries")
 export class UpdateCommentaryController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private updateCommentaryUseCase: UpdateCommentaryUseCase) {}
   @Put(":commentaryId")
   @HttpCode(203)
   async handle(
@@ -27,31 +26,15 @@ export class UpdateCommentaryController {
   ) {
     const { content } = body;
 
-    if (!commentaryId) {
-      throw new ConflictException("commentaryId is required");
-    }
-
     if (!content) {
       throw new ConflictException("content is required");
     }
 
+    const updatedCommentary = await this.updateCommentaryUseCase.execute(
+      commentaryId,
+      content
+    );
 
-    const module = await this.prisma.commentary.findUnique({
-      where: {
-        id: commentaryId,
-      },
-    });
-
-    if (!module) {
-      throw new NotFoundException("Commentary not found");
-    }
-    await this.prisma.commentary.update({
-      where: {
-        id: commentaryId,
-      },
-      data: {
-        content,
-      },
-    });
+    return updatedCommentary;
   }
 }

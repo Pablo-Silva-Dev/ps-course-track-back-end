@@ -49,6 +49,7 @@ import { GetCommentaryUseCase } from "./useCases/commentaries/getCommentary";
 import { ListCommentariesByClassUseCase } from "./useCases/commentaries/listCommentariesByClassUseCase";
 import { ListCommentariesByUserUseCase } from "./useCases/commentaries/listCommentariesByUserUseCase";
 import { ListCommentariesUseCase } from "./useCases/commentaries/listCommentariesUseCase";
+import { UpdateCommentaryUseCase } from "./useCases/commentaries/updateCommentaryUseCase";
 import { CreateTutorUseCase } from "./useCases/tutors/createTutorUseCase";
 import { DeleteTutorUseCase } from "./useCases/tutors/deleteTutorUseCase";
 import { GetTutorUseCase } from "./useCases/tutors/getTutorUseCase";
@@ -124,6 +125,7 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     ListCommentariesByClassUseCase,
     ListCommentariesByUserUseCase,
     GetCommentaryUseCase,
+    UpdateCommentaryUseCase,
   ],
 })
 export class AppModule {}
