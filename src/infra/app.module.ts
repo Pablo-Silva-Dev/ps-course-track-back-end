@@ -45,6 +45,7 @@ import { TutorsRepository } from "./repositories/implementations/tutorsRepositor
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { PrismaService } from "./services/prismaService";
 import { CreateCommentaryUseCase } from "./useCases/commentaries/createCommentaryUseCase";
+import { DeleteCommentaryUseCase } from "./useCases/commentaries/deleteCommentaryUseCase";
 import { GetCommentaryUseCase } from "./useCases/commentaries/getCommentary";
 import { ListCommentariesByClassUseCase } from "./useCases/commentaries/listCommentariesByClassUseCase";
 import { ListCommentariesByUserUseCase } from "./useCases/commentaries/listCommentariesByUserUseCase";
@@ -126,6 +127,7 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     ListCommentariesByUserUseCase,
     GetCommentaryUseCase,
     UpdateCommentaryUseCase,
+    DeleteCommentaryUseCase,
   ],
 })
 export class AppModule {}
