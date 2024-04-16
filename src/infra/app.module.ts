@@ -12,6 +12,7 @@ import { DeleteCommentaryController } from "./controllers/commentaries/delete_co
 import { GetCommentaryController } from "./controllers/commentaries/get_commentary";
 import { ListCommentariesController } from "./controllers/commentaries/list_commentaries";
 import { ListCommentariesByClassController } from "./controllers/commentaries/list_commentaries_by_class";
+import { ListCommentariesByUserController } from "./controllers/commentaries/list_commentaries_by_user";
 import { UpdateCommentaryController } from "./controllers/commentaries/update_commentary";
 import { CreateCourseController } from "./controllers/courses/create_course";
 import { DeleteCourseController } from "./controllers/courses/delete_course";
@@ -45,6 +46,7 @@ import { UsersRepository } from "./repositories/implementations/usersRepository"
 import { PrismaService } from "./services/prismaService";
 import { CreateCommentaryUseCase } from "./useCases/commentaries/createCommentaryUseCase";
 import { ListCommentariesByClassUseCase } from "./useCases/commentaries/listCommentariesByClassUseCase";
+import { ListCommentariesByUserUseCase } from "./useCases/commentaries/listCommentariesByUserUseCase";
 import { ListCommentariesUseCase } from "./useCases/commentaries/listCommentariesUseCase";
 import { CreateTutorUseCase } from "./useCases/tutors/createTutorUseCase";
 import { DeleteTutorUseCase } from "./useCases/tutors/deleteTutorUseCase";
@@ -99,6 +101,7 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     UpdateUserCourseMetricsController,
     GetUserCourseMetricsController,
     ListCommentariesByClassController,
+    ListCommentariesByUserController,
   ],
   providers: [
     PrismaService,
@@ -118,6 +121,7 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     CommentariesRepository,
     ListCommentariesUseCase,
     ListCommentariesByClassUseCase,
+    ListCommentariesByUserUseCase,
   ],
 })
 export class AppModule {}
