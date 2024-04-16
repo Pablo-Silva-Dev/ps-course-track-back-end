@@ -11,6 +11,7 @@ import { CreateCommentaryController } from "./controllers/commentaries/create_co
 import { DeleteCommentaryController } from "./controllers/commentaries/delete_commentary";
 import { GetCommentaryController } from "./controllers/commentaries/get_commentary";
 import { ListCommentariesController } from "./controllers/commentaries/list_commentaries";
+import { ListCommentariesByClassController } from "./controllers/commentaries/list_commentaries_by_class";
 import { UpdateCommentaryController } from "./controllers/commentaries/update_commentary";
 import { CreateCourseController } from "./controllers/courses/create_course";
 import { DeleteCourseController } from "./controllers/courses/delete_course";
@@ -38,19 +39,23 @@ import { UpdateUserController } from "./controllers/users/update_user";
 import { FetchClassController } from "./controllers/watchedClasses/fetch_watched_class";
 import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_class";
 import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
+import { CommentariesRepository } from "./repositories/implementations/commentariesRepository";
 import { TutorsRepository } from "./repositories/implementations/tutorsRepository";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { PrismaService } from "./services/prismaService";
+import { CreateCommentaryUseCase } from "./useCases/commentaries/createCommentaryUseCase";
+import { ListCommentariesByClassUseCase } from "./useCases/commentaries/listCommentariesByClassUseCase";
+import { ListCommentariesUseCase } from "./useCases/commentaries/listCommentariesUseCase";
 import { CreateTutorUseCase } from "./useCases/tutors/createTutorUseCase";
 import { DeleteTutorUseCase } from "./useCases/tutors/deleteTutorUseCase";
 import { GetTutorUseCase } from "./useCases/tutors/getTutorUseCase";
 import { ListTutorsUseCase } from "./useCases/tutors/listTutorsUseCase";
+import { UpdateTutorUseCase } from "./useCases/tutors/updateTutorUseCase";
 import { CreateUserUseCase } from "./useCases/users/createUserUseCase";
 import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
 import { ListUsersUseCase } from "./useCases/users/listUsersUseCase";
 import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
-import { UpdateTutorUseCase } from "./useCases/tutors/updateTutorUseCase";
 @Module({
   controllers: [
     CreateCourseController,
@@ -93,6 +98,7 @@ import { UpdateTutorUseCase } from "./useCases/tutors/updateTutorUseCase";
     CreateUserCourseMetricsController,
     UpdateUserCourseMetricsController,
     GetUserCourseMetricsController,
+    ListCommentariesByClassController,
   ],
   providers: [
     PrismaService,
@@ -107,7 +113,11 @@ import { UpdateTutorUseCase } from "./useCases/tutors/updateTutorUseCase";
     ListTutorsUseCase,
     GetTutorUseCase,
     DeleteTutorUseCase,
-    UpdateTutorUseCase
+    UpdateTutorUseCase,
+    CreateCommentaryUseCase,
+    CommentariesRepository,
+    ListCommentariesUseCase,
+    ListCommentariesByClassUseCase,
   ],
 })
 export class AppModule {}

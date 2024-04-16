@@ -3,12 +3,12 @@ import { Course } from "./Course";
 import { User } from "./User";
 
 export interface Commentary {
-  id: string;
+  id?: string;
   content: string;
   userId: string;
-  user: User;
+  user?: User;
   classId: string;
-  class: Class;
+  class?: Class;
   courseId: string;
-  course: Course;
+  course?: Course;
 }
