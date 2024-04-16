@@ -1,43 +1,13 @@
-import {
-  Body,
-  ConflictException,
-  Controller,
-  Get,
-  HttpCode,
-  NotFoundException,
-} from "@nestjs/common";
-import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
-
-const getCommentaryBodySchema = z.object({
-  commentaryId: z.string(),
-});
-
-type GetCommentaryBodySchema = z.infer<typeof getCommentaryBodySchema>;
+import { Controller, Get, HttpCode, Param } from "@nestjs/common";
+import { GetCommentaryUseCase } from "src/infra/useCases/commentaries/getCommentary";
 
 @Controller("/commentaries/getUnique")
 export class GetCommentaryController {
-  constructor(private prisma: PrismaService) {}
-  @Get()
+  constructor(private getCommentaryUseCase: GetCommentaryUseCase) {}
+  @Get(":commentaryId")
   @HttpCode(200)
-  async handle(@Body() body: GetCommentaryBodySchema) {
-    const { commentaryId } = body;
-
-    if (!commentaryId) {
-      throw new ConflictException("commentaryId is required");
-    }
-
-    const commentary = await this.prisma.commentary.findUnique({
-      where: {
-        id: commentaryId,
-      },
-    });
-
-    if (!commentary) {
-      throw new NotFoundException(
-        "No commentary found for the provided commentaryId"
-      );
-    }
+  async handle(@Param("commentaryId") commentaryId: string) {
+    const commentary = await this.getCommentaryUseCase.execute(commentaryId);
 
     return commentary;
   }
