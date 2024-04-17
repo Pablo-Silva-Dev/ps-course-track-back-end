@@ -78,6 +78,18 @@ export class CoursesRepository implements ICoursesRepository {
   }
 
   async deleteCourse(courseId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    const course = await this.prisma.course.findUnique({
+      where: {
+        id: courseId,
+      },
+    });
+
+    if (course) {
+      await this.prisma.course.delete({
+        where: {
+          id: courseId,
+        },
+      });
+    }
   }
 }
