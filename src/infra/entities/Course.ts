@@ -6,7 +6,7 @@ import { UserCourse } from "./UserCourse";
 import { UserMetrics } from "./UserMetrics";
 
 export interface Course {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   duration: number;

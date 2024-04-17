@@ -3,46 +3,63 @@ import {
   ConflictException,
   Controller,
   HttpCode,
+  Inject,
   Post,
 } from "@nestjs/common";
+import { CreateCourseUseCase } from "src/infra/useCases/courses/createCourseUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const createCourseBodySchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  duration: z.number(),
-  cover_url: z.string(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  duration: z.number().optional(),
+  cover_url: z.string().optional(),
 });
 
 type CreateCourseBodySchema = z.infer<typeof createCourseBodySchema>;
 
 @Controller("/courses")
 export class CreateCourseController {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @Inject(CreateCourseUseCase)
+    private createCourseUseCase: CreateCourseUseCase
+  ) {}
   @Post()
   @HttpCode(201)
   async handle(@Body() body: CreateCourseBodySchema) {
     const { name, cover_url, description, duration } =
       createCourseBodySchema.parse(body);
 
-    const courseAlreadyExists = await this.prisma.course.findUnique({
-      where: {
-        name,
-      },
-    });
+    const isBodyValidated = createCourseBodySchema.safeParse(body);
 
-    if (courseAlreadyExists) {
-      throw new ConflictException("Already exists a course with this name.");
+    if (!name) {
+      throw new ConflictException("name is required");
     }
 
-    await this.prisma.course.create({
-      data: {
-        name,
-        cover_url,
-        description,
-        duration,
-      },
+    if (!cover_url) {
+      throw new ConflictException("cover_url is required");
+    }
+
+    if (!description) {
+      throw new ConflictException("description is required");
+    }
+
+    if (!duration) {
+      throw new ConflictException("duration is required");
+    }
+
+    if (!isBodyValidated) {
+      throw new ConflictException(
+        "Invalid request body. Check if all fields are informed."
+      );
+    }
+
+    const createdCourse = await this.createCourseUseCase.execute({
+      name,
+      cover_url,
+      description,
+      duration,
     });
+    return createdCourse;
   }
 }
