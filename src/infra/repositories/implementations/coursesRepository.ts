@@ -55,10 +55,28 @@ export class CoursesRepository implements ICoursesRepository {
 
   async updateCourse(
     courseId: string,
-    { description, cover_url }: Course
+    { description, cover_url, name }: Course
   ): Promise<void | Course> {
-    throw new Error("Method not implemented.");
+    const course = await this.prisma.course.findUnique({
+      where: {
+        id: courseId,
+      },
+    });
+    if (course) {
+      const updatedCourse = await this.prisma.course.update({
+        where: {
+          id: courseId,
+        },
+        data: {
+          description,
+          cover_url,
+          name,
+        },
+      });
+      return updatedCourse;
+    }
   }
+
   async deleteCourse(courseId: string): Promise<void> {
     throw new Error("Method not implemented.");
   }
