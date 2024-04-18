@@ -59,6 +59,7 @@ import { GetCourseUseCase } from "./useCases/courses/getCourseUseCase";
 import { ListCoursesUseCase } from "./useCases/courses/listCoursesUseCase";
 import { UpdateCourseUseCase } from "./useCases/courses/updateCourseUseCase";
 import { CreateModuleUseCase } from "./useCases/modules/createModuleUseCase";
+import { GetModuleUseCase } from "./useCases/modules/getModuleUseCase";
 import { ListModulesUseCase } from "./useCases/modules/listModulesUseCase";
 import { CreateTutorUseCase } from "./useCases/tutors/createTutorUseCase";
 import { DeleteTutorUseCase } from "./useCases/tutors/deleteTutorUseCase";
@@ -146,6 +147,7 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     ModulesRepository,
     CreateModuleUseCase,
     ListModulesUseCase,
+    GetModuleUseCase,
   ],
 })
 export class AppModule {}
