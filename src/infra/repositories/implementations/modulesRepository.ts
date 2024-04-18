@@ -58,21 +58,30 @@ export class ModulesRepository implements IModulesRepository {
       return module;
     }
   }
-  async getModuleByName(moduleName: string): Promise<void | Module> {
-    const module = await this.prisma.module.findUnique({
-      where: {
-        name: moduleName,
-      },
-    });
-    if (module) {
-      return module;
-    }
-  }
   async updateModule(
     moduleId: string,
-    { description, cover_url }: Module
+    { description, cover_url, name, duration }: Module
   ): Promise<void | Module> {
-    throw new Error("Method not implemented.");
+    const module = await this.prisma.module.findUnique({
+      where: {
+        id: moduleId,
+      },
+    });
+
+    if (module) {
+      const updatedModule = await this.prisma.module.update({
+        where: {
+          id: moduleId,
+        },
+        data: {
+          description,
+          cover_url,
+          name,
+          duration,
+        },
+      });
+      return updatedModule;
+    }
   }
   async deleteModule(moduleId: string): Promise<void> {
     throw new Error("Method not implemented.");

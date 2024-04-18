@@ -6,8 +6,8 @@ import {
   Param,
   Put,
 } from "@nestjs/common";
+import { UpdateModuleUseCase } from "src/infra/useCases/modules/updateModuleUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const updateModuleBodySchema = z.object({
   name: z.string().optional(),
@@ -20,7 +20,7 @@ type UpdateModuleBodySchema = z.infer<typeof updateModuleBodySchema>;
 
 @Controller("/modules")
 export class UpdateModuleController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private updateModuleUseCase: UpdateModuleUseCase) {}
   @Put(":moduleId")
   @HttpCode(203)
   async handle(
@@ -33,38 +33,12 @@ export class UpdateModuleController {
       throw new ConflictException("moduleId is required");
     }
 
-    const module = await this.prisma.module.findUnique({
-      where: {
-        id: moduleId,
-      },
+    const updatedModule = await this.updateModuleUseCase.execute(moduleId, {
+      cover_url,
+      name,
+      description,
+      duration,
     });
-
-    if (!module) {
-      throw new ConflictException("Module not found");
-    }
-
-    const moduleAlreadyExists = await this.prisma.module.findUnique({
-      where: {
-        name,
-      },
-    });
-
-    if (moduleAlreadyExists) {
-      throw new ConflictException(
-        "There is already a module with the provided name. Please try another one."
-      );
-    }
-
-    await this.prisma.module.update({
-      where: {
-        id: moduleId,
-      },
-      data: {
-        name,
-        description,
-        duration,
-        cover_url,
-      },
-    });
+    return updatedModule;
   }
 }
