@@ -42,17 +42,6 @@ export class CoursesRepository implements ICoursesRepository {
     }
   }
 
-  async getCourseByName(courseName: string): Promise<void | Course> {
-    const course = await this.prisma.course.findUnique({
-      where: {
-        name: courseName,
-      },
-    });
-    if (course) {
-      return course;
-    }
-  }
-
   async updateCourse(
     courseId: string,
     { description, cover_url, name }: Course

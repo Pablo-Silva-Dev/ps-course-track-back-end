@@ -8,7 +8,7 @@ export class UpdateTutorUseCase {
     const tutor = await this.tutorsRepository.getTutorById(tutorId);
     if (!tutor) {
       throw new NotFoundException(
-        "Not found a tutor with the provided tutorId."
+        "Not found a tutor for the provided tutorId."
       );
     }
 

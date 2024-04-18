@@ -6,15 +6,24 @@ import { ITutorsRepository } from "../interfaces/tutorsRepository";
 @Injectable()
 export class TutorsRepository implements ITutorsRepository {
   constructor(private prisma: PrismaService) {}
+
   async createTutor({ name, bio }: Tutor): Promise<Tutor> {
-    const tutor = await this.prisma.tutor.create({
-      data: {
+    const tutorAlreadyExists = await this.prisma.tutor.findUnique({
+      where: {
         name,
-        bio,
       },
     });
 
-    return tutor;
+    if (!tutorAlreadyExists) {
+      const createdTutor = await this.prisma.tutor.create({
+        data: {
+          name,
+          bio,
+        },
+      });
+
+      return createdTutor;
+    }
   }
   async listTutors(): Promise<Tutor[]> {
     const tutors = await this.prisma.tutor.findMany();
@@ -24,19 +33,6 @@ export class TutorsRepository implements ITutorsRepository {
     const tutor = await this.prisma.tutor.findUnique({
       where: {
         id: tutorId,
-      },
-    });
-
-    if (tutor) {
-      return tutor;
-    }
-
-    return null;
-  }
-  async getTutorByName(name: string): Promise<void | Tutor> {
-    const tutor = await this.prisma.tutor.findUnique({
-      where: {
-        name,
       },
     });
 
@@ -56,12 +52,13 @@ export class TutorsRepository implements ITutorsRepository {
       },
     });
     if (tutor) {
-      await this.prisma.tutor.update({
+      const updatedTutor = await this.prisma.tutor.update({
         where: {
           id: tutorId,
         },
         data,
       });
+      return updatedTutor;
     }
   }
   async deleteTutor(tutorId: string): Promise<void> {
