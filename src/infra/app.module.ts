@@ -72,6 +72,7 @@ import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
 import { ListUsersUseCase } from "./useCases/users/listUsersUseCase";
 import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
+import { DeleteModuleUseCase } from "./useCases/modules/deleteModuleUseCase";
 @Module({
   controllers: [
     CreateCourseController,
@@ -150,6 +151,7 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     ListModulesUseCase,
     GetModuleUseCase,
     UpdateModuleUseCase,
+    DeleteModuleUseCase
   ],
 })
 export class AppModule {}

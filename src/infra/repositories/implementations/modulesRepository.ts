@@ -84,6 +84,18 @@ export class ModulesRepository implements IModulesRepository {
     }
   }
   async deleteModule(moduleId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+    const module = await this.prisma.module.findUnique({
+      where: {
+        id: moduleId,
+      },
+    });
+
+    if (module) {
+      await this.prisma.module.delete({
+        where: {
+          id: moduleId,
+        },
+      });
+    }
   }
 }

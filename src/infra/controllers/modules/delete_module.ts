@@ -1,45 +1,21 @@
 import {
-  Body,
   ConflictException,
   Controller,
   Delete,
   HttpCode,
+  Param,
 } from "@nestjs/common";
-import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
-
-const deleteModuleBodySchema = z.object({
-  moduleId: z.string(),
-});
-
-type DeleteModuleBodySchema = z.infer<typeof deleteModuleBodySchema>;
+import { DeleteModuleUseCase } from "src/infra/useCases/modules/deleteModuleUseCase";
 
 @Controller("/modules")
 export class DeleteModuleController {
-  constructor(private prisma: PrismaService) {}
-  @Delete()
+  constructor(private deleteModuleUseCase: DeleteModuleUseCase) {}
+  @Delete(":moduleId")
   @HttpCode(204)
-  async handle(@Body() body: DeleteModuleBodySchema) {
-    const { moduleId } = body;
-
+  async handle(@Param("moduleId") moduleId: string) {
     if (!moduleId) {
       throw new ConflictException("moduleId is required");
     }
-
-    const module = await this.prisma.module.findUnique({
-      where: {
-        id: moduleId,
-      },
-    });
-
-    if (!module) {
-      throw new ConflictException("No found a module with the specified id");
-    }
-
-    await this.prisma.module.delete({
-      where: {
-        id: moduleId,
-      },
-    });
+    await this.deleteModuleUseCase.execute(moduleId);
   }
 }
