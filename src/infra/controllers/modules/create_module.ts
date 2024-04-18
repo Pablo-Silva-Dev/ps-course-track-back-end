@@ -5,56 +5,64 @@ import {
   HttpCode,
   Post,
 } from "@nestjs/common";
+import { CreateModuleUseCase } from "src/infra/useCases/modules/createModuleUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const createModuleBodySchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  duration: z.number(),
-  cover_url: z.string(),
-  courseId: z.string(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  duration: z.number().optional(),
+  cover_url: z.string().optional(),
+  courseId: z.string().optional(),
 });
 
 type CreateModuleBodySchema = z.infer<typeof createModuleBodySchema>;
 
 @Controller("/modules")
 export class CreateModuleController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private createModuleUseCase: CreateModuleUseCase) {}
   @Post()
   @HttpCode(201)
   async handle(@Body() body: CreateModuleBodySchema) {
     const { name, cover_url, description, duration, courseId } =
       createModuleBodySchema.parse(body);
 
-    const moduleAlreadyExists = await this.prisma.module.findUnique({
-      where: {
-        name,
-      },
-    });
+    const isBodyValidated = createModuleBodySchema.safeParse(body);
 
-    const courseExists = await this.prisma.course.findUnique({
-      where: {
-        id: courseId,
-      },
-    });
-
-    if (moduleAlreadyExists) {
-      throw new ConflictException("Already exists a module with this name.");
+    if (!courseId) {
+      throw new ConflictException("courseId is required");
     }
 
-    if (!courseExists) {
-      throw new ConflictException("Course not found.");
+    if (!name) {
+      throw new ConflictException("name is required");
     }
 
-    await this.prisma.module.create({
-      data: {
-        name,
-        cover_url,
-        description,
-        duration,
-        courseId,
-      },
+    if (!cover_url) {
+      throw new ConflictException("cover_url is required");
+    }
+
+    if (!description) {
+      throw new ConflictException("description is required");
+    }
+
+    if (!duration) {
+      throw new ConflictException("duration is required");
+    }
+
+    if (!isBodyValidated) {
+      throw new ConflictException(
+        "Invalid request body. Check if all fields are informed."
+      );
+    }
+
+    const createdModule = await this.createModuleUseCase.execute({
+      name,
+      courseId,
+      description,
+      cover_url,
+      duration,
     });
+
+    return createdModule;
   }
 }

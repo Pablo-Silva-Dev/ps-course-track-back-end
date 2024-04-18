@@ -1,46 +1,22 @@
 import {
-  Body,
   ConflictException,
   Controller,
   Get,
   HttpCode,
+  Param,
 } from "@nestjs/common";
-import { PrismaService } from "src/infra/services/prismaService";
-import { z } from "zod";
-
-const listModulesBodySchema = z.object({
-  courseId: z.string(),
-});
-
-type ListModulesBodySchema = z.infer<typeof listModulesBodySchema>;
+import { ListModulesUseCase } from "src/infra/useCases/modules/listModulesUseCase";
 
 @Controller("/modules")
 export class ListModulesController {
-  constructor(private prisma: PrismaService) {}
-  @Get()
+  constructor(private listModulesUseCase: ListModulesUseCase) {}
+  @Get(":courseId")
   @HttpCode(200)
-  async handle(@Body() body: ListModulesBodySchema) {
-    const { courseId } = body;
-
-    const courseExists = await this.prisma.course.findUnique({
-      where: {
-        id: courseId,
-      },
-    });
-
-    const modules = await this.prisma.module.findMany({
-      where: {
-        courseId,
-      },
-      include: {
-        classes: true,
-      },
-    });
-
-    if (!courseExists) {
-      throw new ConflictException("Course not found");
+  async handle(@Param("courseId") courseId: string) {
+    if (!courseId) {
+      throw new ConflictException("courseId is required");
     }
-
+    const modules = await this.listModulesUseCase.execute(courseId);
     return modules;
   }
 }

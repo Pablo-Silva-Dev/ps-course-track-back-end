@@ -42,6 +42,7 @@ import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_c
 import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
 import { CommentariesRepository } from "./repositories/implementations/commentariesRepository";
 import { CoursesRepository } from "./repositories/implementations/coursesRepository";
+import { ModulesRepository } from "./repositories/implementations/modulesRepository";
 import { TutorsRepository } from "./repositories/implementations/tutorsRepository";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { PrismaService } from "./services/prismaService";
@@ -53,9 +54,12 @@ import { ListCommentariesByUserUseCase } from "./useCases/commentaries/listComme
 import { ListCommentariesUseCase } from "./useCases/commentaries/listCommentariesUseCase";
 import { UpdateCommentaryUseCase } from "./useCases/commentaries/updateCommentaryUseCase";
 import { CreateCourseUseCase } from "./useCases/courses/createCourseUseCase";
+import { DeleteCourseUseCase } from "./useCases/courses/deleteCourseUseCase";
 import { GetCourseUseCase } from "./useCases/courses/getCourseUseCase";
 import { ListCoursesUseCase } from "./useCases/courses/listCoursesUseCase";
 import { UpdateCourseUseCase } from "./useCases/courses/updateCourseUseCase";
+import { CreateModuleUseCase } from "./useCases/modules/createModuleUseCase";
+import { ListModulesUseCase } from "./useCases/modules/listModulesUseCase";
 import { CreateTutorUseCase } from "./useCases/tutors/createTutorUseCase";
 import { DeleteTutorUseCase } from "./useCases/tutors/deleteTutorUseCase";
 import { GetTutorUseCase } from "./useCases/tutors/getTutorUseCase";
@@ -66,7 +70,6 @@ import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
 import { ListUsersUseCase } from "./useCases/users/listUsersUseCase";
 import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
-import { DeleteCourseUseCase } from "./useCases/courses/deleteCourseUseCase";
 @Module({
   controllers: [
     CreateCourseController,
@@ -139,7 +142,10 @@ import { DeleteCourseUseCase } from "./useCases/courses/deleteCourseUseCase";
     GetCourseUseCase,
     CoursesRepository,
     UpdateCourseUseCase,
-    DeleteCourseUseCase
+    DeleteCourseUseCase,
+    ModulesRepository,
+    CreateModuleUseCase,
+    ListModulesUseCase,
   ],
 })
 export class AppModule {}
