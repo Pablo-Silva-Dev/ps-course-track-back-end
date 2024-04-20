@@ -5,80 +5,75 @@ import {
   HttpCode,
   Post,
 } from "@nestjs/common";
+import { CreateClassUseCase } from "src/infra/useCases/classes/createClassUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const createClassBodySchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  url: z.string(),
-  duration: z.number(),
-  moduleId: z.string(),
-  tutorId: z.string(),
-  courseId: z.string(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  url: z.string().optional(),
+  duration: z.number().optional(),
+  moduleId: z.string().optional(),
+  tutorId: z.string().optional(),
+  courseId: z.string().optional(),
 });
 
 type CreateClassBodySchema = z.infer<typeof createClassBodySchema>;
 
 @Controller("/classes")
 export class CreateClassController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private createClassUseCase: CreateClassUseCase) {}
   @Post()
   @HttpCode(201)
   async handle(@Body() body: CreateClassBodySchema) {
     const { name, description, url, duration, moduleId, tutorId, courseId } =
       createClassBodySchema.parse(body);
 
-    const classAlreadyExists = await this.prisma.class.findUnique({
-      where: {
-        name,
-      },
-    });
+    const isBodyValidated = await createClassBodySchema.safeParse(body);
 
-    const module = await this.prisma.module.findUnique({
-      where: {
-        id: moduleId,
-      },
-    });
-
-    const tutor = await this.prisma.tutor.findUnique({
-      where: {
-        id: tutorId,
-      },
-    });
-
-    const course = await this.prisma.course.findUnique({
-      where: {
-        id: courseId,
-      },
-    });
-
-    if (!module) {
-      throw new ConflictException("Module not found");
+    if (!name) {
+      throw new ConflictException("name is required");
     }
 
-    if (!tutor) {
-      throw new ConflictException("Tutor not found");
+    if (!description) {
+      throw new ConflictException("description is required");
     }
 
-    if (!course) {
-      throw new ConflictException("Course not found");
+    if (!url) {
+      throw new ConflictException("url is required");
     }
 
-    if (classAlreadyExists) {
-      throw new ConflictException("Already exists a class with provided name");
+    if (!duration) {
+      throw new ConflictException("duration is required");
     }
 
-    await this.prisma.class.create({
-      data: {
-        name,
-        description,
-        url,
-        duration,
-        moduleId,
-        tutorId,
-        courseId
-      },
+    if (!moduleId) {
+      throw new ConflictException("moduleId is required");
+    }
+
+    if (!tutorId) {
+      throw new ConflictException("tutorId is required");
+    }
+
+    if (!courseId) {
+      throw new ConflictException("courseId is required");
+    }
+
+    if (!isBodyValidated) {
+      throw new ConflictException(
+        "Invalid request body. Check if all fields are informed."
+      );
+    }
+
+    const createdClass = await this.createClassUseCase.execute({
+      name,
+      description,
+      url,
+      duration,
+      moduleId,
+      tutorId,
+      courseId,
     });
+    return createdClass;
   }
 }
