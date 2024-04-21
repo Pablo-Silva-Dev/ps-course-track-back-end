@@ -52,7 +52,11 @@ export class ClassesRepository implements IClassesRepository {
     }
   }
   async listClasses(): Promise<Class[]> {
-    const classes = await this.prisma.class.findMany();
+    const classes = await this.prisma.class.findMany({
+      include: {
+        commentaries: true,
+      },
+    });
     return classes;
   }
   async listClassesByModule(moduleId: string): Promise<Class[]> {
@@ -97,7 +101,19 @@ export class ClassesRepository implements IClassesRepository {
       return updatedClass;
     }
   }
-  async deleteClass(courseId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async deleteClass(classId: string): Promise<void> {
+    const foundClass = await this.prisma.class.findUnique({
+      where: {
+        id: classId,
+      },
+    });
+
+    if (foundClass) {
+      await this.prisma.class.delete({
+        where: {
+          id: classId,
+        },
+      });
+    }
   }
 }

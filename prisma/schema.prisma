@@ -74,11 +74,11 @@ model Commentary {
   id       String @id @default(uuid())
   content  String
   userId   String
-  user     User   @relation(fields: [userId], references: [id])
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   classId  String
-  class    Class  @relation(fields: [classId], references: [id])
+  class    Class  @relation(fields: [classId], references: [id], onDelete: Cascade)
   courseId String
-  course   Course @relation(fields: [courseId], references: [id])
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 }
 
 model UserCourse {
@@ -113,6 +113,6 @@ model UserWatchedClasses {
   classId String
   watchedAt DateTime @default(now())
   user User @relation(fields: [userId], references: [id])
-  class Class @relation(fields: [classId], references: [id])
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
   @@id([userId, classId])
 }

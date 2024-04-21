@@ -49,6 +49,7 @@ import { TutorsRepository } from "./repositories/implementations/tutorsRepositor
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { PrismaService } from "./services/prismaService";
 import { CreateClassUseCase } from "./useCases/classes/createClassUseCase";
+import { DeleteClassUseCase } from "./useCases/classes/deleteClassUseCase";
 import { GetClassUseCase } from "./useCases/classes/getClassUseCase";
 import { ListClassesByModuleUseCase } from "./useCases/classes/listClassesByModuleUseCase";
 import { ListClassesUseCase } from "./useCases/classes/listClassesUseCase";
@@ -166,6 +167,7 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     ListClassesByModuleUseCase,
     GetClassUseCase,
     UpdateClassUseCase,
+    DeleteClassUseCase,
   ],
 })
 export class AppModule {}

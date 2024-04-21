@@ -5,8 +5,8 @@ import {
   Delete,
   HttpCode,
 } from "@nestjs/common";
+import { DeleteClassUseCase } from "src/infra/useCases/classes/deleteClassUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const deleteClassBodySchema = z.object({
   classId: z.string(),
@@ -16,7 +16,7 @@ type DeleteClassBodySchema = z.infer<typeof deleteClassBodySchema>;
 
 @Controller("/classes")
 export class DeleteClassController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private deleteClassUseCase: DeleteClassUseCase) {}
   @Delete()
   @HttpCode(204)
   async handle(@Body() body: DeleteClassBodySchema) {
@@ -26,20 +26,6 @@ export class DeleteClassController {
       throw new ConflictException("classId is required");
     }
 
-    const classData = await this.prisma.class.findUnique({
-      where: {
-        id: classId,
-      },
-    });
-
-    if (!classData) {
-      throw new ConflictException("No found a class with the specified id");
-    }
-
-    await this.prisma.class.delete({
-      where: {
-        id: classId,
-      },
-    });
+    await this.deleteClassUseCase.execute(classId);
   }
 }
