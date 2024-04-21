@@ -52,6 +52,7 @@ import { CreateClassUseCase } from "./useCases/classes/createClassUseCase";
 import { GetClassUseCase } from "./useCases/classes/getClassUseCase";
 import { ListClassesByModuleUseCase } from "./useCases/classes/listClassesByModuleUseCase";
 import { ListClassesUseCase } from "./useCases/classes/listClassesUseCase";
+import { UpdateClassUseCase } from "./useCases/classes/updateClassUseCase";
 import { CreateCommentaryUseCase } from "./useCases/commentaries/createCommentaryUseCase";
 import { DeleteCommentaryUseCase } from "./useCases/commentaries/deleteCommentaryUseCase";
 import { GetCommentaryUseCase } from "./useCases/commentaries/getCommentary";
@@ -164,6 +165,7 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     ListClassesUseCase,
     ListClassesByModuleUseCase,
     GetClassUseCase,
+    UpdateClassUseCase,
   ],
 })
 export class AppModule {}

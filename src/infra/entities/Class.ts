@@ -12,7 +12,7 @@ export interface Class {
   url?: string;
   moduleId?: string;
   module?: Module;
-  tutorId: string;
+  tutorId?: string;
   tutor?: Tutor;
   courseId?: string;
   course?: Course;

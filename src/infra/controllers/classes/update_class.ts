@@ -6,8 +6,8 @@ import {
   Param,
   Put,
 } from "@nestjs/common";
+import { UpdateClassUseCase } from "src/infra/useCases/classes/updateClassUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const updateClassBodySchema = z.object({
   name: z.string(),
@@ -23,89 +23,37 @@ type UpdateClassBodySchema = z.infer<typeof updateClassBodySchema>;
 
 @Controller("/classes")
 export class UpdateClassController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private updateClassUseCase: UpdateClassUseCase) {}
   @Put(":classId")
   @HttpCode(203)
   async handle(
     @Param("classId") classId: string,
     @Body() body: UpdateClassBodySchema
   ) {
-    const { url, description, duration, name, moduleId, courseId, tutorId } =
-      body;
+    const { url, description, name } = body;
 
     if (!classId) {
       throw new ConflictException("classId is required");
     }
 
-    const module = await this.prisma.module.findUnique({
-      where: {
-        id: moduleId,
-      },
-    });
-
-    const course = await this.prisma.course.findUnique({
-      where: {
-        id: courseId,
-      },
-    });
-
-    const tutor = await this.prisma.tutor.findUnique({
-      where: {
-        id: tutorId,
-      },
-    });
-
-    if (!module) {
-      throw new ConflictException("Module not found");
-    }
-
-    if (!course) {
-      throw new ConflictException("Course not found");
-    }
-
-    if (!tutor) {
-      throw new ConflictException("Tutor not found");
-    }
-
-    const classAlreadyExists = await this.prisma.class.findUnique({
-      where: {
-        name,
-      },
-    });
-
-    if (classAlreadyExists) {
+    if (!name || !url || !description) {
       throw new ConflictException(
-        "There is already a class with the provided name. Please try another one."
+        "'name', 'url', and 'description' are required fields"
       );
     }
 
-    if (
-      !name ||
-      !url ||
-      !description ||
-      !duration ||
-      !tutorId ||
-      !moduleId ||
-      !courseId
-    ) {
+    if (!name || !url || !description) {
       throw new ConflictException(
-        "'name', 'url', 'description', 'tutorId', 'courseId', 'moduleId', and 'duration' are required fields"
+        "'name', 'url', and 'description' are required fields"
       );
     }
 
-    await this.prisma.class.update({
-      where: {
-        id: classId,
-      },
-      data: {
-        name,
-        description,
-        duration,
-        url,
-        courseId,
-        tutorId,
-        moduleId
-      },
+    const updatedClass = await this.updateClassUseCase.execute(classId, {
+      name,
+      url,
+      description,
     });
+
+    return updatedClass;
   }
 }

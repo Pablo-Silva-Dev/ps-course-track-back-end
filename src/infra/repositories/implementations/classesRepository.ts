@@ -75,10 +75,27 @@ export class ClassesRepository implements IClassesRepository {
     }
   }
   async updateClass(
-    courseId: string,
-    { description, name }: Class
+    classId: string,
+    { description, name, url }: Class
   ): Promise<void | Class> {
-    throw new Error("Method not implemented.");
+    const foundClass = await this.prisma.class.findUnique({
+      where: {
+        id: classId,
+      },
+    });
+    if (foundClass) {
+      const updatedClass = await this.prisma.class.update({
+        where: {
+          id: classId,
+        },
+        data: {
+          description,
+          name,
+          url,
+        },
+      });
+      return updatedClass;
+    }
   }
   async deleteClass(courseId: string): Promise<void> {
     throw new Error("Method not implemented.");
