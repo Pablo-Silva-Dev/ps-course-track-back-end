@@ -47,6 +47,7 @@ import { CoursesRepository } from "./repositories/implementations/coursesReposit
 import { ModulesRepository } from "./repositories/implementations/modulesRepository";
 import { TutorsRepository } from "./repositories/implementations/tutorsRepository";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
+import { WatchedClassesRepository } from "./repositories/implementations/watchedClassesRepository";
 import { PrismaService } from "./services/prismaService";
 import { CreateClassUseCase } from "./useCases/classes/createClassUseCase";
 import { DeleteClassUseCase } from "./useCases/classes/deleteClassUseCase";
@@ -81,6 +82,8 @@ import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
 import { ListUsersUseCase } from "./useCases/users/listUsersUseCase";
 import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
+import { FetchWatchedClassUseCase } from "./useCases/watchedClasses/fetchClassUseCase";
+import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
 @Module({
   controllers: [
     CreateCourseController,
@@ -168,6 +171,9 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
     GetClassUseCase,
     UpdateClassUseCase,
     DeleteClassUseCase,
+    WatchedClassesRepository,
+    WatchClassUseCase,
+    FetchWatchedClassUseCase,
   ],
 })
 export class AppModule {}

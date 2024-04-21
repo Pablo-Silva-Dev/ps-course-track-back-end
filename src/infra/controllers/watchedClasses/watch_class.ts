@@ -5,8 +5,8 @@ import {
   HttpCode,
   Post,
 } from "@nestjs/common";
+import { WatchClassUseCase } from "src/infra/useCases/watchedClasses/watchClassUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const watchClassBodySchema = z.object({
   userId: z.string(),
@@ -15,32 +15,27 @@ const watchClassBodySchema = z.object({
 
 type WatchClassBodySchema = z.infer<typeof watchClassBodySchema>;
 
-@Controller("watched-classes")
+@Controller("watched-classes/watch")
 export class WatchClassesController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private watchClassUseCase: WatchClassUseCase) {}
   @Post()
   @HttpCode(201)
   async handle(@Body() body: WatchClassBodySchema) {
     const { classId, userId } = watchClassBodySchema.parse(body);
 
-    const watchedClass = await this.prisma.userWatchedClasses.findUnique({
-      where: {
-        userId_classId: {
-          userId,
-          classId,
-        },
-      },
-    });
-
-    if (watchedClass) {
-      throw new ConflictException("Class was recorded as watched already.");
+    if (!classId) {
+      throw new ConflictException("classId is required.");
     }
 
-    await this.prisma.userWatchedClasses.create({
-      data: {
-        classId,
-        userId,
-      },
-    });
+    if (!userId) {
+      throw new ConflictException("classId is required.");
+    }
+
+    const registerWatchedClass = await this.watchClassUseCase.execute(
+      userId,
+      classId
+    );
+
+    return registerWatchedClass;
   }
 }
