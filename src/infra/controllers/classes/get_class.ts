@@ -5,8 +5,8 @@ import {
   Get,
   HttpCode,
 } from "@nestjs/common";
+import { GetClassUseCase } from "src/infra/useCases/classes/getClassUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const getClassBodySchema = z.object({
   classId: z.string(),
@@ -16,7 +16,7 @@ type GetClassBodySchema = z.infer<typeof getClassBodySchema>;
 
 @Controller("/classes/getUnique")
 export class GetClassController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private getClassUseCase: GetClassUseCase) {}
   @Get()
   @HttpCode(200)
   async handle(@Body() body: GetClassBodySchema) {
@@ -26,16 +26,8 @@ export class GetClassController {
       throw new ConflictException("classId is required");
     }
 
-    const classData = await this.prisma.class.findUnique({
-      where: {
-        id: classId,
-      },
-    });
+    const foundClass = await this.getClassUseCase.execute(classId);
 
-    if (!classData) {
-      throw new ConflictException("No class found for the provided classId");
-    }
-
-    return classData;
+    return foundClass;
   }
 }

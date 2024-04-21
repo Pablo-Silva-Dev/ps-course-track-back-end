@@ -63,8 +63,16 @@ export class ClassesRepository implements IClassesRepository {
     });
     return classes;
   }
-  async getClassById(courseId: string): Promise<void | Class> {
-    throw new Error("Method not implemented.");
+  async getClassById(classId: string): Promise<void | Class> {
+    const foundClass = await this.prisma.class.findUnique({
+      where: {
+        id: classId,
+      },
+    });
+
+    if (foundClass) {
+      return foundClass;
+    }
   }
   async updateClass(
     courseId: string,
