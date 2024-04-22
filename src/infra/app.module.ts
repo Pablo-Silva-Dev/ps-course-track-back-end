@@ -83,6 +83,7 @@ import { GetUserUseCase } from "./useCases/users/getUserUseCase";
 import { ListUsersUseCase } from "./useCases/users/listUsersUseCase";
 import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
 import { FetchWatchedClassUseCase } from "./useCases/watchedClasses/fetchClassUseCase";
+import { UnwatchClassUseCase } from "./useCases/watchedClasses/unwatchClass";
 import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
 @Module({
   controllers: [
@@ -174,6 +175,7 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     WatchedClassesRepository,
     WatchClassUseCase,
     FetchWatchedClassUseCase,
+    UnwatchClassUseCase,
   ],
 })
 export class AppModule {}

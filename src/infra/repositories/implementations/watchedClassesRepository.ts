@@ -51,7 +51,25 @@ export class WatchedClassesRepository implements IWatchedClassesRepository {
       ...watchedClass,
     };
   }
-  unwatchClass(userId: string, classId: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async unwatchClass(userId: string, classId: string): Promise<void> {
+    const watchedClass = await this.prisma.userWatchedClasses.findUnique({
+      where: {
+        userId_classId: {
+          userId,
+          classId,
+        },
+      },
+    });
+
+    if (watchedClass) {
+      await this.prisma.userWatchedClasses.delete({
+        where: {
+          userId_classId: {
+            userId,
+            classId,
+          },
+        },
+      });
+    }
   }
 }

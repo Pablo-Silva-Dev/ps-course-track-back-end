@@ -1,12 +1,12 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Delete,
   HttpCode,
-  NotFoundException,
 } from "@nestjs/common";
+import { UnwatchClassUseCase } from "src/infra/useCases/watchedClasses/unwatchClass";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const unwatchClassBodySchema = z.object({
   userId: z.string(),
@@ -15,34 +15,22 @@ const unwatchClassBodySchema = z.object({
 
 type UnwatchClassBodySchema = z.infer<typeof unwatchClassBodySchema>;
 
-@Controller("watched-classes")
+@Controller("watched-classes/unwatch")
 export class UnwatchClassesController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private unwatchClassUseCase: UnwatchClassUseCase) {}
   @Delete()
   @HttpCode(204)
   async handle(@Body() body: UnwatchClassBodySchema) {
     const { classId, userId } = unwatchClassBodySchema.parse(body);
 
-    const watchedClass = await this.prisma.userWatchedClasses.findUnique({
-      where: {
-        userId_classId: {
-          userId,
-          classId,
-        },
-      },
-    });
-
-    if (!watchedClass) {
-      throw new NotFoundException("Watched class not found");
+    if (!classId) {
+      throw new ConflictException("classId is required.");
     }
 
-    await this.prisma.userWatchedClasses.delete({
-      where: {
-        userId_classId: {
-          userId,
-          classId,
-        },
-      },
-    });
+    if (!userId) {
+      throw new ConflictException("classId is required.");
+    }
+
+    await this.unwatchClassUseCase.execute(userId, classId);
   }
 }
