@@ -80,6 +80,7 @@ import { ListTutorsUseCase } from "./useCases/tutors/listTutorsUseCase";
 import { UpdateTutorUseCase } from "./useCases/tutors/updateTutorUseCase";
 import { CreateUserCourseMetricsUseCase } from "./useCases/userCourseMetrics/createUserCourseMetricsUseCase";
 import { GetUserCourseMetricsUseCase } from "./useCases/userCourseMetrics/getUserCourseMetricsUseCase";
+import { UpdateUserCourseMetricsUseCase } from "./useCases/userCourseMetrics/updateUserCourseMetricsUseCase";
 import { CreateUserUseCase } from "./useCases/users/createUserUseCase";
 import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
@@ -182,6 +183,7 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     UserCourseMetricsRepository,
     CreateUserCourseMetricsUseCase,
     GetUserCourseMetricsUseCase,
+    UpdateUserCourseMetricsUseCase,
   ],
 })
 export class AppModule {}

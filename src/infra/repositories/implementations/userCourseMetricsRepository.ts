@@ -47,6 +47,33 @@ export class UserCourseMetricsRepository
     return userCourseMetrics;
   }
   async update(data: UserCourseMetrics): Promise<UserCourseMetrics> {
-    throw new Error("Method not implemented.");
+    const {
+      userId,
+      courseId,
+      courseTotalClasses,
+      totalWatchedClasses,
+      totalWatchedClassesPercentage,
+    } = data;
+
+    const userCourseMetrics = await this.prisma.userMetrics.findUnique({
+      where: {
+        userId,
+        courseId,
+      },
+    });
+    if (userCourseMetrics) {
+    }
+    const updatedUserCourseMetrics = await this.prisma.userMetrics.update({
+      where: {
+        courseId,
+        userId,
+      },
+      data: {
+        courseTotalClasses,
+        totalWatchedClasses,
+        totalWatchedClassesPercentage,
+      },
+    });
+    return updatedUserCourseMetrics;
   }
 }
