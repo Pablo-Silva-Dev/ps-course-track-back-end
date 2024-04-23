@@ -1,26 +1,32 @@
 import {
   Body,
+  ConflictException,
   Controller,
   HttpCode,
-  NotAcceptableException,
   Post,
 } from "@nestjs/common";
+import { CreateUserCourseMetricsUseCase } from "src/infra/useCases/userCourseMetrics/createUserCourseMetricsUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const createUserMetricsBodySchema = z.object({
-  userId: z.string(),
-  courseId: z.string(),
-  courseTotalClasses: z.number(),
-  totalWatchedClasses: z.number(),
-  totalWatchedClassesPercentage: z.number(),
+  userId: z.string().optional(),
+  courseId: z.string().optional(),
+  courseTotalClasses: z.number().optional(),
+  totalWatchedClasses: z.number().optional(),
+  totalWatchedClassesPercentage: z.number().optional(),
 });
 
 type CreateUserMetricsBodySchema = z.infer<typeof createUserMetricsBodySchema>;
 
+//  to correctly handle this use case, perform COUNT over class.length associated with the course and COUNT the total of records on UserWatchedClasses model.
+
+// check if is possible to calculate the percentage value of watched classes and return it
+
 @Controller("/user-course-metrics")
 export class CreateUserCourseMetricsController {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private createUserCourseMetricsUseCase: CreateUserCourseMetricsUseCase
+  ) {}
   @Post()
   @HttpCode(201)
   async handle(@Body() body: CreateUserMetricsBodySchema) {
@@ -32,27 +38,35 @@ export class CreateUserCourseMetricsController {
       totalWatchedClassesPercentage,
     } = createUserMetricsBodySchema.parse(body);
 
-    const metricsAlreadyExists = await this.prisma.userMetrics.findFirst({
-      where: {
-        courseId,
-        userId,
-      },
-    });
-
-    if (metricsAlreadyExists) {
-      throw new NotAcceptableException(
-        "Already exists metrics for this user linked to this course"
-      );
+    if (!userId) {
+      throw new ConflictException("userId is required");
     }
 
-    await this.prisma.userMetrics.create({
-      data: {
+    if (!courseId) {
+      throw new ConflictException("courseId is required");
+    }
+
+    if (!courseTotalClasses) {
+      throw new ConflictException("courseTotalClasses is required");
+    }
+
+    if (!totalWatchedClasses) {
+      throw new ConflictException("totalWatchedClasses is required");
+    }
+
+    if (!totalWatchedClassesPercentage) {
+      throw new ConflictException("totalWatchedClassesPercentage is required");
+    }
+
+    const createdUserCourseMetrics =
+      await this.createUserCourseMetricsUseCase.execute({
         userId,
         courseId,
         courseTotalClasses,
         totalWatchedClasses,
         totalWatchedClassesPercentage,
-      },
-    });
+      });
+
+    return createdUserCourseMetrics;
   }
 }

@@ -46,6 +46,7 @@ import { CommentariesRepository } from "./repositories/implementations/commentar
 import { CoursesRepository } from "./repositories/implementations/coursesRepository";
 import { ModulesRepository } from "./repositories/implementations/modulesRepository";
 import { TutorsRepository } from "./repositories/implementations/tutorsRepository";
+import { UserCourseMetricsRepository } from "./repositories/implementations/userCourseMetricsRepository";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { WatchedClassesRepository } from "./repositories/implementations/watchedClassesRepository";
 import { PrismaService } from "./services/prismaService";
@@ -77,6 +78,8 @@ import { DeleteTutorUseCase } from "./useCases/tutors/deleteTutorUseCase";
 import { GetTutorUseCase } from "./useCases/tutors/getTutorUseCase";
 import { ListTutorsUseCase } from "./useCases/tutors/listTutorsUseCase";
 import { UpdateTutorUseCase } from "./useCases/tutors/updateTutorUseCase";
+import { CreateUserCourseMetricsUseCase } from "./useCases/userCourseMetrics/createUserCourseMetricsUseCase";
+import { GetUserCourseMetricsUseCase } from "./useCases/userCourseMetrics/getUserCourseMetricsUseCase";
 import { CreateUserUseCase } from "./useCases/users/createUserUseCase";
 import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
@@ -176,6 +179,9 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     WatchClassUseCase,
     FetchWatchedClassUseCase,
     UnwatchClassUseCase,
+    UserCourseMetricsRepository,
+    CreateUserCourseMetricsUseCase,
+    GetUserCourseMetricsUseCase,
   ],
 })
 export class AppModule {}

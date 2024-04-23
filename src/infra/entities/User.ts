@@ -1,7 +1,7 @@
 import { Commentary } from "./Commentary";
 import { Course } from "./Course";
 import { UserCourse } from "./UserCourse";
-import { UserMetrics } from "./UserMetrics";
+import { UserCourseMetrics } from "./UserCourseMetrics";
 import { UserWatchedClasses } from "./UserWatchedClasses";
 
 export interface User {
@@ -14,6 +14,6 @@ export interface User {
   courses?: Course[];
   commentaries?: Commentary[];
   UserCourse?: UserCourse[];
-  userMetrics?: UserMetrics;
+  userMetrics?: UserCourseMetrics;
   watchedClasses?: UserWatchedClasses[];
 }

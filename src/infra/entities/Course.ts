@@ -3,7 +3,7 @@ import { Class } from "./Class";
 import { Commentary } from "./Commentary";
 import { Module } from "./Module";
 import { UserCourse } from "./UserCourse";
-import { UserMetrics } from "./UserMetrics";
+import { UserCourseMetrics } from "./UserCourseMetrics";
 
 export interface Course {
   id?: string;
@@ -16,5 +16,5 @@ export interface Course {
   commentaries?: Commentary[];
   UserCourse?: UserCourse[];
   classes?: Class[];
-  userMetrics?: UserMetrics;
+  userMetrics?: UserCourseMetrics;
 }

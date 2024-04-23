@@ -1,8 +1,8 @@
 import { Course } from "./Course";
 import { User } from "./User";
 
-export interface UserMetrics {
-  id: string;
+export interface UserCourseMetrics {
+  id?: string;
   userId: string;
   user?: User;
   courseId: string;
