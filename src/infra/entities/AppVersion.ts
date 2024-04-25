@@ -1,5 +1,5 @@
 export interface AppVersion {
-  id: string;
+  id?: string;
   appVersion: string;
   availableOniOS: boolean;
   availableOnAndroid: boolean;

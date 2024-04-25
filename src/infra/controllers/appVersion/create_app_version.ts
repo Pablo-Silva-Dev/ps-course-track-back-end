@@ -6,51 +6,42 @@ import {
   Post,
 } from "@nestjs/common";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
+import { CreateAppVersionUseCase } from "./../../useCases/appVersions/createAppVersionUseCase";
 
 const createAppVersionBodySchema = z.object({
-  appVersion: z.string(),
-  availableOniOS: z.boolean(),
-  availableOnAndroid: z.boolean(),
+  appVersion: z.string().optional(),
+  availableOniOS: z.boolean().optional(),
+  availableOnAndroid: z.boolean().optional(),
 });
 
 type CreateAppVersionBodySchema = z.infer<typeof createAppVersionBodySchema>;
 
 @Controller("/appVersion")
 export class CreateAppVersionController {
-  constructor(private prisma: PrismaService) {}
+  constructor(private createAppVersionUseCase: CreateAppVersionUseCase) {}
   @Post()
   @HttpCode(201)
   async handle(@Body() body: CreateAppVersionBodySchema) {
     const { availableOnAndroid, availableOniOS, appVersion } =
       createAppVersionBodySchema.parse(body);
 
-    const MAX_APP_VERSION_RECORDS_ALLOWED = 1;
-
-    const appVersionRecordsQuantity = await this.prisma.appVersion.count();
-
-    if (
-      !appVersion ||
-      availableOniOS === undefined ||
-      availableOnAndroid === undefined
-    ) {
-      throw new ConflictException(
-        "'appVersion', 'availableOniOS', and 'availableOnAndroid' are required fields"
-      );
+    if (!appVersion) {
+      throw new ConflictException("appVersion is required.");
+    }
+    if (availableOnAndroid === undefined) {
+      throw new ConflictException("availableOnAndroid is required.");
     }
 
-    if (appVersionRecordsQuantity >= MAX_APP_VERSION_RECORDS_ALLOWED) {
-      throw new ConflictException(
-        "There is an app version registered already. Consider to update it instead creating a new one."
-      );
+    if (availableOnAndroid === undefined) {
+      throw new ConflictException("availableOniOS is required.");
     }
 
-    await this.prisma.appVersion.create({
-      data: {
-        appVersion,
-        availableOnAndroid,
-        availableOniOS,
-      },
+    const createdVersion = await this.createAppVersionUseCase.execute({
+      appVersion,
+      availableOnAndroid,
+      availableOniOS,
     });
+
+    return createdVersion;
   }
 }
