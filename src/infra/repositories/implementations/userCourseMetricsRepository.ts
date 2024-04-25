@@ -11,10 +11,7 @@ export class UserCourseMetricsRepository
   async create(data: UserCourseMetrics): Promise<UserCourseMetrics | void> {
     const {
       userId,
-      courseId,
-      courseTotalClasses,
-      totalWatchedClasses,
-      totalWatchedClassesPercentage,
+      courseId
     } = data;
 
     const metrics = await this.prisma.userMetrics.findUnique({
@@ -24,14 +21,25 @@ export class UserCourseMetricsRepository
       },
     });
 
+    const totalCourseClasses = await this.prisma.class.count({
+      where: {
+        courseId,
+      },
+    });
+
+    const totalClassesWatched = await this.prisma.userWatchedClasses.count();
+
+    const coursePercentage =
+      Number(totalClassesWatched / totalCourseClasses) * 100;
+
     if (!metrics) {
       const createdMetrics = await this.prisma.userMetrics.create({
         data: {
           userId,
           courseId,
-          courseTotalClasses,
-          totalWatchedClasses,
-          totalWatchedClassesPercentage,
+          courseTotalClasses: totalCourseClasses,
+          totalWatchedClasses: totalClassesWatched,
+          totalWatchedClassesPercentage: coursePercentage,
         },
       });
       return createdMetrics;
@@ -47,13 +55,7 @@ export class UserCourseMetricsRepository
     return userCourseMetrics;
   }
   async update(data: UserCourseMetrics): Promise<UserCourseMetrics> {
-    const {
-      userId,
-      courseId,
-      courseTotalClasses,
-      totalWatchedClasses,
-      totalWatchedClassesPercentage,
-    } = data;
+    const { userId, courseId } = data;
 
     const userCourseMetrics = await this.prisma.userMetrics.findUnique({
       where: {
@@ -61,19 +63,31 @@ export class UserCourseMetricsRepository
         courseId,
       },
     });
-    if (userCourseMetrics) {
-    }
-    const updatedUserCourseMetrics = await this.prisma.userMetrics.update({
+
+    const totalCourseClasses = await this.prisma.class.count({
       where: {
         courseId,
-        userId,
-      },
-      data: {
-        courseTotalClasses,
-        totalWatchedClasses,
-        totalWatchedClassesPercentage,
       },
     });
-    return updatedUserCourseMetrics;
+
+    const totalClassesWatched = await this.prisma.userWatchedClasses.count();
+
+    const coursePercentage =
+      Number(totalClassesWatched / totalCourseClasses) * 100;
+
+    if (userCourseMetrics) {
+      const updatedUserCourseMetrics = await this.prisma.userMetrics.update({
+        where: {
+          courseId,
+          userId,
+        },
+        data: {
+          courseTotalClasses: totalCourseClasses,
+          totalWatchedClasses: totalClassesWatched,
+          totalWatchedClassesPercentage: coursePercentage,
+        },
+      });
+      return updatedUserCourseMetrics;
+    }
   }
 }

@@ -7,7 +7,7 @@ export interface UserCourseMetrics {
   user?: User;
   courseId: string;
   course?: Course;
-  courseTotalClasses: number;
-  totalWatchedClasses: number;
-  totalWatchedClassesPercentage: number;
+  courseTotalClasses?: number;
+  totalWatchedClasses?: number;
+  totalWatchedClassesPercentage?: number;
 }
