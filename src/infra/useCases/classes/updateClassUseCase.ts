@@ -1,8 +1,9 @@
 import {
-    ConflictException,
-    Injectable,
-    NotFoundException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
 } from "@nestjs/common";
+import { IUpdateClassDTO } from "src/infra/dtos/ClassDTO";
 import { Class } from "src/infra/entities/Class";
 import { ClassesRepository } from "src/infra/repositories/implementations/classesRepository";
 
@@ -12,7 +13,7 @@ export class UpdateClassUseCase {
   async execute(classId: string, { url, description, name }: Class) {
     const foundClass = (await this.classesRepository.getClassById(
       classId
-    )) as Class;
+    )) as IUpdateClassDTO;
 
     if (foundClass?.name === name) {
       throw new ConflictException(

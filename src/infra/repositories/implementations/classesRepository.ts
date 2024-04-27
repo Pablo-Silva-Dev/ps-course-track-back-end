@@ -2,11 +2,12 @@ import { Injectable } from "@nestjs/common";
 import { Class } from "src/infra/entities/Class";
 import { PrismaService } from "../../services/prismaService";
 import { IClassesRepository } from "../interfaces/classesRepository";
+import { ICreateClassDTO, IUpdateClassDTO } from "src/infra/dtos/ClassDTO";
 
 @Injectable()
 export class ClassesRepository implements IClassesRepository {
   constructor(private prisma: PrismaService) {}
-  async createClass(data: Class): Promise<Class> {
+  async createClass(data: ICreateClassDTO): Promise<Class> {
     const { name, duration, description, courseId, url, moduleId, tutorId } =
       data;
 
@@ -80,7 +81,7 @@ export class ClassesRepository implements IClassesRepository {
   }
   async updateClass(
     classId: string,
-    { description, name, url }: Class
+    { description, name, url }: IUpdateClassDTO
   ): Promise<void | Class> {
     const foundClass = await this.prisma.class.findUnique({
       where: {

@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { IUpdateAppVersionDTO } from "src/infra/dtos/AppVersionDTO";
+import { ICreateAppVersionDTO, IUpdateAppVersionDTO } from "src/infra/dtos/AppVersionDTO";
 import { AppVersion } from "src/infra/entities/AppVersion";
 import { PrismaService } from "src/infra/services/prismaService";
 import { IAppVersionRepository } from "../interfaces/appVersionsRepository";
@@ -8,7 +8,7 @@ import { IAppVersionRepository } from "../interfaces/appVersionsRepository";
 export class AppVersionsRepository implements IAppVersionRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: AppVersion): Promise<void | AppVersion> {
+  async create(data: ICreateAppVersionDTO): Promise<void | AppVersion> {
     const { appVersion } = data;
 
     const appVersionAlreadyExists = await this.prisma.appVersion.findFirst({

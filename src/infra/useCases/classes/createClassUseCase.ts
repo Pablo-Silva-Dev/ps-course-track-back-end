@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { Class } from "src/infra/entities/Class";
+import { ICreateClassDTO } from "src/infra/dtos/ClassDTO";
 import { ClassesRepository } from "src/infra/repositories/implementations/classesRepository";
 import { CoursesRepository } from "src/infra/repositories/implementations/coursesRepository";
 import { ModulesRepository } from "src/infra/repositories/implementations/modulesRepository";
@@ -13,7 +13,7 @@ export class CreateClassUseCase {
     private coursesRepository: CoursesRepository,
     private tutorsRepository: TutorsRepository
   ) {}
-  async execute(data: Class) {
+  async execute(data: ICreateClassDTO) {
     const { moduleId, courseId, tutorId } = data;
 
     const module = await this.modulesRepository.getModuleById(moduleId);
