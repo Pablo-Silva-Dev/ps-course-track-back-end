@@ -1,23 +1,36 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { ICreateCommentaryDTO } from "src/infra/dtos/CommentaryDTO";
+import { ClassesRepository } from "src/infra/repositories/implementations/classesRepository";
+import { CoursesRepository } from "src/infra/repositories/implementations/coursesRepository";
 import { UsersRepository } from "src/infra/repositories/implementations/usersRepository";
-import { Commentary } from "../../entities/Commentary";
 import { CommentariesRepository } from "../../repositories/implementations/commentariesRepository";
 
 @Injectable()
 export class CreateCommentaryUseCase {
   constructor(
     private commentariesRepository: CommentariesRepository,
-    private usersRepository: UsersRepository
+    private usersRepository: UsersRepository,
+    private classesRepositories: ClassesRepository,
+    private coursesRepository: CoursesRepository
   ) {}
-  async execute(commentaryData: Commentary) {
+  async execute(commentaryData: ICreateCommentaryDTO) {
     const { userId, classId, courseId } = commentaryData;
 
-    const userExists = await this.usersRepository.getUserById(userId);
+    const user = await this.usersRepository.getUserById(userId);
+    const classExists = await this.classesRepositories.getClassById(classId);
+    const course = await this.coursesRepository.getCourseById(courseId);
 
-    //ADD CLASS AND COURSE VALIDATION LIKE DONE WITH USER
+    if (!user) {
+      throw new NotFoundException("There is no user for the provided userId");
+    }
 
-    if (!userExists) {
-      throw new NotFoundException("There is no user with the provided userId");
+    if (!classExists) {
+      throw new NotFoundException("There is no class for the provided classId");
+    }
+    if (!course) {
+      throw new NotFoundException(
+        "There is no course for the provided courseId"
+      );
     }
 
     const commentary =

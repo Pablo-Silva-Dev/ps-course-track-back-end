@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { Commentary } from "src/infra/entities/Commentary";
 import { PrismaService } from "src/infra/services/prismaService";
 import { ICommentariesRepository } from "../interfaces/commentariesRepository";
+import { ICreateCommentaryDTO } from "src/infra/dtos/CommentaryDTO";
 
 @Injectable()
 export class CommentariesRepository implements ICommentariesRepository {
@@ -11,7 +12,7 @@ export class CommentariesRepository implements ICommentariesRepository {
     courseId,
     classId,
     content,
-  }: Commentary): Promise<Commentary> {
+  }: ICreateCommentaryDTO): Promise<Commentary> {
     const course = await this.prisma.course.findUnique({
       where: {
         id: courseId,
