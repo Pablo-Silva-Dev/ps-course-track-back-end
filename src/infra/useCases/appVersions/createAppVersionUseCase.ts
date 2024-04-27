@@ -9,7 +9,7 @@ export class CreateAppVersionUseCase {
     const { appVersion } = data;
 
     const appVersionAlreadyExists =
-      await this.appVersionsRepository.getUnique(appVersion);
+      await this.appVersionsRepository.getUniqueByVersionName(appVersion);
 
     if (appVersionAlreadyExists) {
       throw new ConflictException(

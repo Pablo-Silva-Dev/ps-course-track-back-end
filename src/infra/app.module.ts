@@ -53,6 +53,7 @@ import { WatchedClassesRepository } from "./repositories/implementations/watched
 import { PrismaService } from "./services/prismaService";
 import { CreateAppVersionUseCase } from "./useCases/appVersions/createAppVersionUseCase";
 import { ListAppVersionsUseCase } from "./useCases/appVersions/listAppVersionsUseCase";
+import { UpdateAppVersionUseCase } from "./useCases/appVersions/updateAppVersionUseCase";
 import { CreateClassUseCase } from "./useCases/classes/createClassUseCase";
 import { DeleteClassUseCase } from "./useCases/classes/deleteClassUseCase";
 import { GetClassUseCase } from "./useCases/classes/getClassUseCase";
@@ -190,6 +191,7 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     AppVersionsRepository,
     CreateAppVersionUseCase,
     ListAppVersionsUseCase,
+    UpdateAppVersionUseCase,
   ],
 })
 export class AppModule {}

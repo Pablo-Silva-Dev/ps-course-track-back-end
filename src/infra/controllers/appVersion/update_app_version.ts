@@ -3,30 +3,31 @@ import {
   ConflictException,
   Controller,
   HttpCode,
-  NotFoundException,
+  Param,
   Put,
 } from "@nestjs/common";
+import { UpdateAppVersionUseCase } from "src/infra/useCases/appVersions/updateAppVersionUseCase";
 import { z } from "zod";
-import { PrismaService } from "../../services/prismaService";
 
 const updateAppVersionBodySchema = z.object({
-  appVersion: z.string(),
-  availableOniOS: z.boolean(),
-  availableOnAndroid: z.boolean(),
+  availableOniOS: z.boolean().optional(),
+  availableOnAndroid: z.boolean().optional(),
 });
 
 type UpdateAppVersionBodySchema = z.infer<typeof updateAppVersionBodySchema>;
 
 @Controller("/appVersion")
 export class UpdateAppVersionController {
-  constructor(private prisma: PrismaService) {}
-  @Put()
+  constructor(private updateAppVersionUseCase: UpdateAppVersionUseCase) {}
+  @Put(":appVersionId")
   @HttpCode(203)
-  async handle(@Body() body: UpdateAppVersionBodySchema) {
-    const { appVersion, availableOnAndroid, availableOniOS } = body;
+  async handle(
+    @Body() body: UpdateAppVersionBodySchema,
+    @Param("appVersionId") appVersionId: string
+  ) {
+    const { availableOnAndroid, availableOniOS } = body;
 
     if (
-      !appVersion ||
       availableOnAndroid === undefined ||
       availableOnAndroid === null ||
       availableOniOS === undefined ||
@@ -37,23 +38,11 @@ export class UpdateAppVersionController {
       );
     }
 
-    const registeredAppVersion = await this.prisma.appVersion.findFirst();
+    const updatedAppVersion = await this.updateAppVersionUseCase.execute(
+      appVersionId,
+      { availableOnAndroid, availableOniOS }
+    );
 
-    if (!registeredAppVersion) {
-      throw new NotFoundException(
-        "There is not an app version registered. Try to register an app version."
-      );
-    }
-
-    await this.prisma.appVersion.update({
-      where: {
-        id: registeredAppVersion.id,
-      },
-      data: {
-        appVersion,
-        availableOnAndroid,
-        availableOniOS,
-      },
-    });
+    return updatedAppVersion;
   }
 }

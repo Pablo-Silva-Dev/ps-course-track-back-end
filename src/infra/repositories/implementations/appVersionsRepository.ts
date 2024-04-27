@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { IUpdateAppVersionDTO } from "src/infra/dtos/AppVersionDTO";
 import { AppVersion } from "src/infra/entities/AppVersion";
 import { PrismaService } from "src/infra/services/prismaService";
 import { IAppVersionRepository } from "../interfaces/appVersionsRepository";
@@ -24,10 +25,21 @@ export class AppVersionsRepository implements IAppVersionRepository {
     }
   }
 
-  async getUnique(appVersionName: string): Promise<void | AppVersion> {
+  async getUniqueByVersionName(
+    appVersionName: string
+  ): Promise<void | AppVersion> {
     const appVersion = await this.prisma.appVersion.findFirst({
       where: {
         appVersion: appVersionName,
+      },
+    });
+    return appVersion;
+  }
+
+  async getUniqueById(appVersionId: string): Promise<void | AppVersion> {
+    const appVersion = await this.prisma.appVersion.findUnique({
+      where: {
+        id: appVersionId,
       },
     });
     return appVersion;
@@ -40,20 +52,18 @@ export class AppVersionsRepository implements IAppVersionRepository {
 
   async update(
     appVersionId: string,
-    data: AppVersion
+    data: IUpdateAppVersionDTO
   ): Promise<void | AppVersion> {
-    const { id } = data;
-
-    const appVersion = await this.prisma.appVersion.findUnique({
+    const appUniqueVersion = await this.prisma.appVersion.findUnique({
       where: {
         id: appVersionId,
       },
     });
 
-    if (appVersion) {
+    if (appUniqueVersion) {
       const updatedAppVersion = await this.prisma.appVersion.update({
         where: {
-          id,
+          id: appVersionId,
         },
         data,
       });
