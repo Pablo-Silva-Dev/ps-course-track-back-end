@@ -1,11 +1,14 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { Course } from "src/infra/entities/Course";
+import { IUpdateCourseDTO } from "src/infra/dtos/CourseDTO";
 import { CoursesRepository } from "src/infra/repositories/implementations/coursesRepository";
 
 @Injectable()
 export class UpdateCourseUseCase {
   constructor(private coursesRepository: CoursesRepository) {}
-  async execute(courseId: string, { cover_url, description, name }: Course) {
+  async execute(
+    courseId: string,
+    { cover_url, description, name }: IUpdateCourseDTO
+  ) {
     const course = await this.coursesRepository.getCourseById(courseId);
 
     if (!course) {

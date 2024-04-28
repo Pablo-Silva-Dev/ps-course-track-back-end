@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { ICreateCourseDTO, IUpdateCourseDTO } from "src/infra/dtos/CourseDTO";
 import { Course } from "src/infra/entities/Course";
 import { PrismaService } from "src/infra/services/prismaService";
 import { ICoursesRepository } from "../interfaces/coursesRepository";
@@ -6,7 +7,7 @@ import { ICoursesRepository } from "../interfaces/coursesRepository";
 @Injectable()
 export class CoursesRepository implements ICoursesRepository {
   constructor(private prisma: PrismaService) {}
-  async createCourse(data: Course): Promise<Course> {
+  async createCourse(data: ICreateCourseDTO): Promise<Course> {
     const { cover_url, description, duration, name } = data;
 
     const courseAlreadyExists = await this.prisma.course.findUnique({
@@ -44,7 +45,7 @@ export class CoursesRepository implements ICoursesRepository {
 
   async updateCourse(
     courseId: string,
-    { description, cover_url, name }: Course
+    { description, cover_url, name }: IUpdateCourseDTO
   ): Promise<void | Course> {
     const course = await this.prisma.course.findUnique({
       where: {
