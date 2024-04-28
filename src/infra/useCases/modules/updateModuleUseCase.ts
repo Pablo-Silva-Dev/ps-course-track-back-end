@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { Module } from "src/infra/entities/Module";
+import { IUpdateModuleDTO } from "src/infra/dtos/ModuleDTO";
 import { ModulesRepository } from "src/infra/repositories/implementations/modulesRepository";
 
 @Injectable()
@@ -7,7 +7,7 @@ export class UpdateModuleUseCase {
   constructor(private modulesRepository: ModulesRepository) {}
   async execute(
     moduleId: string,
-    { cover_url, description, name, duration }: Module
+    { cover_url, description, name, duration }: IUpdateModuleDTO
   ) {
     const module = await this.modulesRepository.getModuleById(moduleId);
 

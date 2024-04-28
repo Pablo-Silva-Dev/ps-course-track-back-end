@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { Module } from "src/infra/entities/Module";
 import { PrismaService } from "src/infra/services/prismaService";
 import { IModulesRepository } from "../interfaces/modulesRepository";
+import { ICreateModuleDTO, IUpdateModuleDTO } from "src/infra/dtos/ModuleDTO";
 
 @Injectable()
 export class ModulesRepository implements IModulesRepository {
@@ -12,7 +13,7 @@ export class ModulesRepository implements IModulesRepository {
     description,
     duration,
     cover_url,
-  }: Module): Promise<Module> {
+  }: ICreateModuleDTO): Promise<Module> {
     const moduleAlreadyExists = await this.prisma.module.findUnique({
       where: {
         name,
@@ -60,7 +61,7 @@ export class ModulesRepository implements IModulesRepository {
   }
   async updateModule(
     moduleId: string,
-    { description, cover_url, name, duration }: Module
+    { description, cover_url, name, duration }: IUpdateModuleDTO
   ): Promise<void | Module> {
     const module = await this.prisma.module.findUnique({
       where: {
