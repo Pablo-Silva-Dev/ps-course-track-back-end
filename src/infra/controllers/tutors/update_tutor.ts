@@ -33,9 +33,7 @@ export class UpdateTutorController {
       );
     }
 
-    const updatedTutor = await this.updateTutorUseCase.execute(tutorId, {
-      bio,
-    });
+    const updatedTutor = await this.updateTutorUseCase.execute(tutorId, bio);
 
     return updatedTutor;
   }

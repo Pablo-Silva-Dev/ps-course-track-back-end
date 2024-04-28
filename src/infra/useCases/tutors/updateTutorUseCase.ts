@@ -4,7 +4,7 @@ import { TutorsRepository } from "../../repositories/implementations/tutorsRepos
 @Injectable()
 export class UpdateTutorUseCase {
   constructor(private tutorsRepository: TutorsRepository) {}
-  async execute(tutorId: string, data: { bio: string }) {
+  async execute(tutorId: string, bio: string) {
     const tutor = await this.tutorsRepository.getTutorById(tutorId);
     if (!tutor) {
       throw new NotFoundException(
@@ -12,7 +12,7 @@ export class UpdateTutorUseCase {
       );
     }
 
-    const updatedTutor = await this.tutorsRepository.updateTutor(tutorId, data);
+    const updatedTutor = await this.tutorsRepository.updateTutor(tutorId, bio);
     return updatedTutor;
   }
 }
