@@ -1,47 +1,25 @@
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from "@nestjs/common";
-import { CoursesRepository } from "src/infra/repositories/implementations/coursesRepository";
-import { UsersRepository } from "src/infra/repositories/implementations/usersRepository";
-import { UserCourseMetrics } from "../../entities/UserCourseMetrics";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { UserCourseMetricsRepository } from "../../repositories/implementations/userCourseMetricsRepository";
 
 @Injectable()
 export class UpdateUserCourseMetricsUseCase {
   constructor(
-    private userCourseMetricsRepository: UserCourseMetricsRepository,
-    private usersRepository: UsersRepository,
-    private coursesRepository: CoursesRepository
+    private userCourseMetricsRepository: UserCourseMetricsRepository
   ) {}
-  async execute(data: UserCourseMetrics) {
-    const { userId, courseId } = data;
-    const user = await this.usersRepository.getUserById(userId);
-    const course = await this.coursesRepository.getCourseById(courseId);
+  async execute(metricsId: string) {
+    const metricsRecord =
+      await this.userCourseMetricsRepository.getUserCourseMetricsById(
+        metricsId
+      );
 
-    const metrics = await this.userCourseMetricsRepository.get(
-      userId,
-      courseId
-    );
-
-    if (!metrics) {
+    if (!metricsRecord) {
       throw new ConflictException(
-        "Not found metrics for this provided user related to the provided course"
+        "Not found metrics for this provided metricsId"
       );
     }
 
-    if (!user) {
-      throw new NotFoundException("Not found an user for the provided userId");
-    }
-
-    if (!course) {
-      throw new NotFoundException(
-        "Not found a course for the provided courseId"
-      );
-    }
-
-    const updatedMetrics = await this.userCourseMetricsRepository.update(data);
+    const updatedMetrics =
+      await this.userCourseMetricsRepository.update(metricsId);
 
     return updatedMetrics;
   }

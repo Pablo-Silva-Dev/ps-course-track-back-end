@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { ICreateUserCourseMetricsDTO } from "src/infra/dtos/UserCourseMetricsDTO";
 import { UserCourseMetrics } from "src/infra/entities/UserCourseMetrics";
 import { PrismaService } from "src/infra/services/prismaService";
 import { IUserCourseMetricsRepository } from "../interfaces/userCourseMetricsRepository";
@@ -8,13 +9,12 @@ export class UserCourseMetricsRepository
   implements IUserCourseMetricsRepository
 {
   constructor(private prisma: PrismaService) {}
-  async create(data: UserCourseMetrics): Promise<UserCourseMetrics | void> {
-    const {
-      userId,
-      courseId
-    } = data;
+  async create(
+    data: ICreateUserCourseMetricsDTO
+  ): Promise<UserCourseMetrics | void> {
+    const { userId, courseId } = data;
 
-    const metrics = await this.prisma.userMetrics.findUnique({
+    const metrics = await this.prisma.userMetrics.findFirst({
       where: {
         userId,
         courseId,
@@ -46,7 +46,7 @@ export class UserCourseMetricsRepository
     }
   }
   async get(userId: string, courseId: string): Promise<UserCourseMetrics> {
-    const userCourseMetrics = await this.prisma.userMetrics.findUnique({
+    const userCourseMetrics = await this.prisma.userMetrics.findFirst({
       where: {
         userId,
         courseId,
@@ -54,19 +54,27 @@ export class UserCourseMetricsRepository
     });
     return userCourseMetrics;
   }
-  async update(data: UserCourseMetrics): Promise<UserCourseMetrics> {
-    const { userId, courseId } = data;
-
+  async getUserCourseMetricsById(
+    metricsId: string
+  ): Promise<UserCourseMetrics> {
     const userCourseMetrics = await this.prisma.userMetrics.findUnique({
       where: {
-        userId,
-        courseId,
+        id: metricsId,
+      },
+    });
+    return userCourseMetrics;
+  }
+
+  async update(metricsId: string): Promise<UserCourseMetrics | void> {
+    const userCourseMetrics = await this.prisma.userMetrics.findUnique({
+      where: {
+        id: metricsId,
       },
     });
 
     const totalCourseClasses = await this.prisma.class.count({
       where: {
-        courseId,
+        courseId: userCourseMetrics.courseId,
       },
     });
 
@@ -78,8 +86,7 @@ export class UserCourseMetricsRepository
     if (userCourseMetrics) {
       const updatedUserCourseMetrics = await this.prisma.userMetrics.update({
         where: {
-          courseId,
-          userId,
+          id: metricsId,
         },
         data: {
           courseTotalClasses: totalCourseClasses,

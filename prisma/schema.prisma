@@ -9,31 +9,31 @@ datasource db {
 }
 
 model User {
-  id           String       @id @default(uuid())
-  name         String
-  cpf          String       @unique
-  email        String       @unique
-  phone        String       @unique
-  password     String
-  courses      Course[]     @relation("UserCourses")
-  commentaries Commentary[]
-  UserCourse   UserCourse[]
-  userMetrics UserMetrics?
+  id             String               @id @default(uuid())
+  name           String
+  cpf            String               @unique
+  email          String               @unique
+  phone          String               @unique
+  password       String
+  courses        Course[]             @relation("UserCourses")
+  commentaries   Commentary[]
+  UserCourse     UserCourse[]
   watchedClasses UserWatchedClasses[]
+  UserMetrics    UserMetrics[]
 }
 
 model Course {
-  id           String       @id @default(uuid())
-  name         String       @unique
+  id           String        @id @default(uuid())
+  name         String        @unique
   description  String
   duration     Int
   cover_url    String
-  users        User[]       @relation("UserCourses")
+  users        User[]        @relation("UserCourses")
   modules      Module[]
   commentaries Commentary[]
   UserCourse   UserCourse[]
-  classes        Class[]
-  userMetrics UserMetrics?
+  classes      Class[]
+  UserMetrics  UserMetrics[]
 }
 
 model Module {
@@ -55,18 +55,18 @@ model Tutor {
 }
 
 model Class {
-  id           String       @id @default(uuid())
-  name         String       @unique
-  description  String
-  duration     Int
-  url          String
-  moduleId     String
-  module       Module       @relation(fields: [moduleId], references: [id])
-  tutorId      String
-  tutor        Tutor        @relation(fields: [tutorId], references: [id])
-  courseId     String
-  course       Course       @relation(fields: [courseId], references: [id])
-  commentaries Commentary[]
+  id             String               @id @default(uuid())
+  name           String               @unique
+  description    String
+  duration       Int
+  url            String
+  moduleId       String
+  module         Module               @relation(fields: [moduleId], references: [id])
+  tutorId        String
+  tutor          Tutor                @relation(fields: [tutorId], references: [id])
+  courseId       String
+  course         Course               @relation(fields: [courseId], references: [id])
+  commentaries   Commentary[]
   watchedByUsers UserWatchedClasses[]
 }
 
@@ -91,28 +91,29 @@ model UserCourse {
 }
 
 model AppVersion {
-  id String @id @default(uuid())
-  appVersion String
-  availableOniOS Boolean
+  id                 String  @id @default(uuid())
+  appVersion         String
+  availableOniOS     Boolean
   availableOnAndroid Boolean
 }
 
-model UserMetrics{
-  id String @id @default(uuid())
-  userId String @unique
-  user User? @relation(fields: [userId], references: [id])
-  courseId String @unique
-  course Course? @relation(fields: [courseId], references: [id])
-  courseTotalClasses Int
-  totalWatchedClasses Int
+model UserMetrics {
+  id                            String  @id @default(uuid())
+  userId                        String
+  user                          User?   @relation(fields: [userId], references: [id])
+  courseId                      String
+  course                        Course? @relation(fields: [courseId], references: [id])
+  courseTotalClasses            Int
+  totalWatchedClasses           Int
   totalWatchedClassesPercentage Int
 }
 
 model UserWatchedClasses {
-  userId String
-  classId String
+  userId    String
+  classId   String
   watchedAt DateTime @default(now())
-  user User @relation(fields: [userId], references: [id])
-  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+
   @@id([userId, classId])
 }

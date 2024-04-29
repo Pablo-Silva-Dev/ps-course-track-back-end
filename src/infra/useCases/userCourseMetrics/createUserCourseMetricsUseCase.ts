@@ -3,9 +3,9 @@ import {
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
+import { ICreateUserCourseMetricsDTO } from "src/infra/dtos/UserCourseMetricsDTO";
 import { CoursesRepository } from "src/infra/repositories/implementations/coursesRepository";
 import { UsersRepository } from "src/infra/repositories/implementations/usersRepository";
-import { UserCourseMetrics } from "../../entities/UserCourseMetrics";
 import { UserCourseMetricsRepository } from "../../repositories/implementations/userCourseMetricsRepository";
 
 @Injectable()
@@ -15,7 +15,7 @@ export class CreateUserCourseMetricsUseCase {
     private usersRepository: UsersRepository,
     private coursesRepository: CoursesRepository
   ) {}
-  async execute(data: UserCourseMetrics) {
+  async execute(data: ICreateUserCourseMetricsDTO) {
     const { userId, courseId } = data;
     const user = await this.usersRepository.getUserById(userId);
     const course = await this.coursesRepository.getCourseById(courseId);
