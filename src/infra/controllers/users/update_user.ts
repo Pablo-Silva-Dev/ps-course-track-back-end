@@ -11,6 +11,7 @@ import { UpdateUserUseCase } from "../../useCases/users/updateUserUseCase";
 const updateUserBodySchema = z.object({
   userId: z.string().optional(),
   password: z.string().optional(),
+  phone: z.string().optional(),
 });
 
 type UpdateUserBodySchema = z.infer<typeof updateUserBodySchema>;
@@ -21,16 +22,16 @@ export class UpdateUserController {
   @Put()
   @HttpCode(203)
   async execute(@Body() body: UpdateUserBodySchema) {
-    const isBodyParsed = updateUserBodySchema.safeParse(body);
+    const { userId, password, phone } = updateUserBodySchema.parse(body);
 
-    const { userId, password } = updateUserBodySchema.parse(body);
-
-    if (!isBodyParsed || !password || !userId) {
-      throw new ConflictException(
-        "Invalid request body. Check if all fields are informed."
-      );
+    if (!userId) {
+      throw new ConflictException("userId is required");
     }
 
-    await this.updateUserUseCase.execute(userId, password);
+    const updatedUser = await this.updateUserUseCase.execute(userId, {
+      password,
+      phone,
+    });
+    return updatedUser;
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { ICreateUserDTO, IUpdateUserDTO } from "src/infra/dtos/UserDTO";
 import { User } from "src/infra/entities/User";
 import { PrismaService } from "../../services/prismaService";
 import { IUsersRepository } from "../interfaces/usersRepository";
@@ -6,16 +7,44 @@ import { IUsersRepository } from "../interfaces/usersRepository";
 @Injectable()
 export class UsersRepository implements IUsersRepository {
   constructor(private prisma: PrismaService) {}
-  async createUser({ cpf, email, password, name, phone }: User): Promise<void> {
-    await this.prisma.user.create({
-      data: {
-        cpf: cpf,
-        email: email,
-        name: name,
-        password: password,
-        phone: phone,
+
+  async createUser({
+    cpf,
+    email,
+    password,
+    name,
+    phone,
+  }: ICreateUserDTO): Promise<User> {
+    const emailAlreadyExists = await this.prisma.user.findUnique({
+      where: {
+        email,
       },
     });
+
+    const phoneAlreadyExists = await this.prisma.user.findUnique({
+      where: {
+        phone,
+      },
+    });
+
+    const cpfAlreadyExists = await this.prisma.user.findUnique({
+      where: {
+        cpf,
+      },
+    });
+
+    if (!emailAlreadyExists && !phoneAlreadyExists && !cpfAlreadyExists) {
+      const user = await this.prisma.user.create({
+        data: {
+          cpf: cpf,
+          email: email,
+          name: name,
+          password: password,
+          phone: phone,
+        },
+      });
+      return user;
+    }
   }
   async listUsers(): Promise<User[]> {
     const users = await this.prisma.user.findMany({
@@ -58,7 +87,21 @@ export class UsersRepository implements IUsersRepository {
       return user;
     }
   }
-  async updateUser(userId: string, password: string): Promise<void> {
+  async getUserByPhone(userPhone: string): Promise<void | User> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        phone: userPhone,
+      },
+    });
+
+    if (user) {
+      return user;
+    }
+  }
+  async updateUser(
+    userId: string,
+    { password, phone }: IUpdateUserDTO
+  ): Promise<User | void> {
     const user = await this.prisma.user.findUnique({
       where: {
         id: userId,
@@ -66,14 +109,16 @@ export class UsersRepository implements IUsersRepository {
     });
 
     if (user) {
-      await this.prisma.user.update({
+      const updatedUser = await this.prisma.user.update({
         where: {
           id: userId,
         },
         data: {
           password,
+          phone,
         },
       });
+      return updatedUser;
     }
   }
   async deleteUser(userId: string): Promise<void> {

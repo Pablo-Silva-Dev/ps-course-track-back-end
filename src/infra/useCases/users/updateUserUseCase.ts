@@ -1,11 +1,12 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { hash } from "bcryptjs";
+import { IUpdateUserDTO } from "src/infra/dtos/UserDTO";
 import { UsersRepository } from "../../repositories/implementations/usersRepository";
 
 @Injectable()
 export class UpdateUserUseCase {
   constructor(private usersRepository: UsersRepository) {}
-  async execute(userId: string, password: string) {
+  async execute(userId: string, { password, phone }: IUpdateUserDTO) {
     const user = await this.usersRepository.getUserById(userId);
 
     if (!user) {
@@ -19,6 +20,10 @@ export class UpdateUserUseCase {
       PASSWORD_ENCRYPTION_SALT_LEVEL
     );
 
-    await this.usersRepository.updateUser(userId, encryptedPassword);
+    const updatedUser = await this.usersRepository.updateUser(userId, {
+      password: encryptedPassword,
+      phone,
+    });
+    return updatedUser;
   }
 }
