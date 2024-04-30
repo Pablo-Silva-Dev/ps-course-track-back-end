@@ -3,6 +3,7 @@ import { CreateAppVersionController } from "./controllers/appVersion/create_app_
 import { ListAppVersionsController } from "./controllers/appVersion/list_app_versions";
 import { UpdateAppVersionController } from "./controllers/appVersion/update_app_version";
 import { CreateCertificateController } from "./controllers/certificates/create_certificate";
+import { GetCertificateController } from "./controllers/certificates/get_certificate";
 import { ListCertificatesController } from "./controllers/certificates/list_certificates";
 import { ListCertificatesByUserController } from "./controllers/certificates/list_certificates_by_user";
 import { CreateClassController } from "./controllers/classes/create_class";
@@ -59,6 +60,7 @@ import { CreateAppVersionUseCase } from "./useCases/appVersions/createAppVersion
 import { ListAppVersionsUseCase } from "./useCases/appVersions/listAppVersionsUseCase";
 import { UpdateAppVersionUseCase } from "./useCases/appVersions/updateAppVersionUseCase";
 import { CreateCertificateUseCase } from "./useCases/certificates/createCertificateUseCase";
+import { GetCertificateUseCase } from "./useCases/certificates/getCertificateUseCase";
 import { ListCertificatesByUserUseCase } from "./useCases/certificates/listCertificatesByUserUseCase";
 import { ListCertificatesUseCase } from "./useCases/certificates/listCertificatesUseCase";
 import { CreateClassUseCase } from "./useCases/classes/createClassUseCase";
@@ -148,6 +150,7 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     CreateCertificateController,
     ListCertificatesController,
     ListCertificatesByUserController,
+    GetCertificateController,
   ],
   providers: [
     PrismaService,
@@ -206,6 +209,7 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     CreateCertificateUseCase,
     ListCertificatesUseCase,
     ListCertificatesByUserUseCase,
+    GetCertificateUseCase,
   ],
 })
 export class AppModule {}
