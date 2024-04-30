@@ -3,6 +3,8 @@ import { CreateAppVersionController } from "./controllers/appVersion/create_app_
 import { ListAppVersionsController } from "./controllers/appVersion/list_app_versions";
 import { UpdateAppVersionController } from "./controllers/appVersion/update_app_version";
 import { CreateCertificateController } from "./controllers/certificates/create_certificate";
+import { ListCertificatesController } from "./controllers/certificates/list_certificates";
+import { ListCertificatesByUserController } from "./controllers/certificates/list_certificates_by_user";
 import { CreateClassController } from "./controllers/classes/create_class";
 import { DeleteClassController } from "./controllers/classes/delete_class";
 import { GetClassController } from "./controllers/classes/get_class";
@@ -57,6 +59,8 @@ import { CreateAppVersionUseCase } from "./useCases/appVersions/createAppVersion
 import { ListAppVersionsUseCase } from "./useCases/appVersions/listAppVersionsUseCase";
 import { UpdateAppVersionUseCase } from "./useCases/appVersions/updateAppVersionUseCase";
 import { CreateCertificateUseCase } from "./useCases/certificates/createCertificateUseCase";
+import { ListCertificatesByUserUseCase } from "./useCases/certificates/listCertificatesByUserUseCase";
+import { ListCertificatesUseCase } from "./useCases/certificates/listCertificatesUseCase";
 import { CreateClassUseCase } from "./useCases/classes/createClassUseCase";
 import { DeleteClassUseCase } from "./useCases/classes/deleteClassUseCase";
 import { GetClassUseCase } from "./useCases/classes/getClassUseCase";
@@ -142,6 +146,8 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     ListCommentariesByClassController,
     ListCommentariesByUserController,
     CreateCertificateController,
+    ListCertificatesController,
+    ListCertificatesByUserController,
   ],
   providers: [
     PrismaService,
@@ -198,6 +204,8 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     UpdateAppVersionUseCase,
     CertificatesRepository,
     CreateCertificateUseCase,
+    ListCertificatesUseCase,
+    ListCertificatesByUserUseCase,
   ],
 })
 export class AppModule {}
