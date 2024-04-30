@@ -1,0 +1,1864 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2024-04-30T10:25:36.274Z",
+    "__export_source": "insomnia.desktop.app:v9.0.0",
+    "resources": [
+        {
+            "_id": "req_9997b1a2266c42b2adaf3fef9cf84f44",
+            "parentId": "fld_7b8d02e703c5444da3859c612322f384",
+            "modified": 1714039196198,
+            "created": 1711126035427,
+            "url": "{{ _.baseUrl }}/appVersion/list",
+            "name": "List",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710426097013,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_7b8d02e703c5444da3859c612322f384",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711126035425,
+            "created": 1711126035425,
+            "name": "AppVersion",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1705084594569.5625,
+            "_type": "request_group"
+        },
+        {
+            "_id": "wrk_44307091086e4654a78362dd7088752e",
+            "parentId": null,
+            "modified": 1711025749005,
+            "created": 1711025749005,
+            "name": "PS Course Track Back-end",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_c45845fd8a8048fe9a6620e2def478c3",
+            "parentId": "fld_7b8d02e703c5444da3859c612322f384",
+            "modified": 1714223735963,
+            "created": 1711126035428,
+            "url": "{{ _.baseUrl }}/appVersion/3a0ea8dc-939c-45ab-9fe9-bdf6b81650e0",
+            "name": "Update",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"availableOniOS\" : true,\n\t\"availableOnAndroid\" : true\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710732172605,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_50689b695b0d41f58461d59dc8b7d854",
+            "parentId": "fld_7b8d02e703c5444da3859c612322f384",
+            "modified": 1714223701396,
+            "created": 1711126035426,
+            "url": "{{ _.baseUrl }}/appVersion",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"appVersion\" : \"1.5.31\",\n\t\"availableOniOS\" : false,\n\t\"availableOnAndroid\" : false\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_72fbb1deb3e84c3eb0ce36a210196f8a",
+            "parentId": "fld_88d1167aa38a44f9a54554052d6ac7ce",
+            "modified": 1713275370907,
+            "created": 1711109283584,
+            "url": "{{ _.baseUrl }}/commentaries/b27b5ec3-d9a9-46a8-a6c1-569de3c91afc",
+            "name": "Delete",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710120021421,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_88d1167aa38a44f9a54554052d6ac7ce",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711109283582,
+            "created": 1711109283582,
+            "name": "Commentaries",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1705276647482.125,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_53435d792b5445f3b5f86f641bef7858",
+            "parentId": "fld_88d1167aa38a44f9a54554052d6ac7ce",
+            "modified": 1713273533317,
+            "created": 1711109283584,
+            "url": "{{ _.baseUrl }}/commentaries/getUnique/b7724a73-1a6e-48cd-97e4-ddae41226a1f",
+            "name": "Get",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710273059217,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_59577ac72af44c76bdbe301d91529904",
+            "parentId": "fld_88d1167aa38a44f9a54554052d6ac7ce",
+            "modified": 1713272853361,
+            "created": 1713272671019,
+            "url": "{{ _.baseUrl }}/commentaries/list-by-user/c68bf6b9-11d3-4c20-9d1d-265bc57fb40a",
+            "name": "List by user",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710311318666,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_c69f868a649943789c64671b8faf01c3",
+            "parentId": "fld_88d1167aa38a44f9a54554052d6ac7ce",
+            "modified": 1713271488142,
+            "created": 1713269532915,
+            "url": "{{ _.baseUrl }}/commentaries/list-by-class/805f9b50-2402-444e-add4-80147239e48e",
+            "name": "List by class",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710349578115,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_f83edbda9f9540d1981fba7cfba0fdb7",
+            "parentId": "fld_88d1167aa38a44f9a54554052d6ac7ce",
+            "modified": 1713268605617,
+            "created": 1711109283584,
+            "url": "{{ _.baseUrl }}/commentaries",
+            "name": "List",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710426097013,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_169c86af01a8479eafb222176355f4b3",
+            "parentId": "fld_88d1167aa38a44f9a54554052d6ac7ce",
+            "modified": 1713274933558,
+            "created": 1711109283585,
+            "url": "{{ _.baseUrl }}/commentaries/b7724a73-1a6e-48cd-97e4-ddae41226a1f",
+            "name": "Update",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"content\" : \"Aula excepcional master ninja 2\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710732172605,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_e55285bbd6624094a2401eb48b6eaf22",
+            "parentId": "fld_88d1167aa38a44f9a54554052d6ac7ce",
+            "modified": 1713353543204,
+            "created": 1711109283583,
+            "url": "{{ _.baseUrl }}/commentaries",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"content\" : \"Excelente aula\",\n\t\"userId\" : \"8928f916-6bc6-4bfd-b600-19a68efb0a26\",\n\t\"classId\" : \"805f9b50-2402-444e-add4-80147239e48e\",\n\t\"courseId\" : \"1df1961f-7de1-4eec-a89b-e7466e7b889d\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_2674d37d7a7d4f7a8867a0423c09339b",
+            "parentId": "fld_01efbdac41054f24923360ffa1eeee7e",
+            "modified": 1713805224157,
+            "created": 1711435106088,
+            "url": "{{ _.baseUrl }}/watched-classes/unwatch",
+            "name": "Unwatch class",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"c68bf6b9-11d3-4c20-9d1d-265bc57fb40a\",\n\t\"classId\" : \"76acb227-40a8-4a65-9e37-9189970f0b6b\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710120021421,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_01efbdac41054f24923360ffa1eeee7e",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711435106085,
+            "created": 1711435106085,
+            "name": "Watched Classes",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1705468700394.6875,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_e391d226a25345b88453d441352d7d1d",
+            "parentId": "fld_01efbdac41054f24923360ffa1eeee7e",
+            "modified": 1713706342983,
+            "created": 1711436355612,
+            "url": "{{ _.baseUrl }}/watched-classes/fetch",
+            "name": "Fetch class",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"c68bf6b9-11d3-4c20-9d1d-265bc57fb40a\",\n\t\"classId\" : \"76acb227-40a8-4a65-9e37-9189970f0b6b\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710885210401,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_7dd7c23016904d7992fb334ce45c51e8",
+            "parentId": "fld_01efbdac41054f24923360ffa1eeee7e",
+            "modified": 1714036866442,
+            "created": 1711435106086,
+            "url": "{{ _.baseUrl }}/watched-classes/watch",
+            "name": "Watch class",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"c68bf6b9-11d3-4c20-9d1d-265bc57fb40a\",\n\t\"classId\" : \"9064a1dc-0791-433d-8dd3-e87062f85a1b\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_599dd17aa03744359266fe41d497b80d",
+            "parentId": "fld_7b91d4faf7ec4ec1904a84208db22788",
+            "modified": 1713880057593,
+            "created": 1711436864736,
+            "url": "{{ _.baseUrl }}/user-course-metrics/get-unique",
+            "name": "Get",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"c68bf6b9-11d3-4c20-9d1d-265bc57fb40a\",\n\t\"courseId\" : \"1df1961f-7de1-4eec-a89b-e7466e7b889d\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710273059217,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_7b91d4faf7ec4ec1904a84208db22788",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711436864732,
+            "created": 1711436864732,
+            "name": "UserCourseMetrics",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1705564726850.9688,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_8ba27567f1074edca29c1569b32c7c4f",
+            "parentId": "fld_7b91d4faf7ec4ec1904a84208db22788",
+            "modified": 1714391679155,
+            "created": 1711436864737,
+            "url": "{{ _.baseUrl }}/user-course-metrics/6275cb7b-9bc2-4d5d-aec8-a54ccd0489cd",
+            "name": "Update",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710732172605,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_34293bc57d834fbc9361ffcc109a8cf3",
+            "parentId": "fld_7b91d4faf7ec4ec1904a84208db22788",
+            "modified": 1714386682876,
+            "created": 1711436864734,
+            "url": "{{ _.baseUrl }}/user-course-metrics",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"8928f916-6bc6-4bfd-b600-19a68efb0a26\",\n\t\"courseId\" : \"1df1961f-7de1-4eec-a89b-e7466e7b889d\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_f7c7be09a416454cad1d42d68cea9091",
+            "parentId": "fld_93619e40f30f419eb19f0c79ae0d08d8",
+            "modified": 1713355781107,
+            "created": 1711100112949,
+            "url": "{{ _.baseUrl }}/users",
+            "name": "Delete",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"6b9c510c-202e-4d16-9b3e-5add8c0ee4ea\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710120021421,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_93619e40f30f419eb19f0c79ae0d08d8",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711100112943,
+            "created": 1711100112943,
+            "name": "Users",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1705660753307.25,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_7f85a0037c034b61b10c4f6f98f438db",
+            "parentId": "fld_93619e40f30f419eb19f0c79ae0d08d8",
+            "modified": 1712105081251,
+            "created": 1711100112950,
+            "url": "{{ _.baseUrl }}/users/getUnique",
+            "name": "Get",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"c68bf6b9-11d3-4c20-9d1d-265bc57fb40a\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710273059217,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_f68d9790725a4044aa264aeb69d0afb8",
+            "parentId": "fld_93619e40f30f419eb19f0c79ae0d08d8",
+            "modified": 1714469502335,
+            "created": 1711100112948,
+            "url": "{{ _.baseUrl }}/users",
+            "name": "List",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"8928f916-6bc6-4bfd-b600-19a68efb0a26\",\n\t\"courseId\" : \"\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710426097013,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_fc216f46cf9a4b39944629c833cf82f5",
+            "parentId": "fld_93619e40f30f419eb19f0c79ae0d08d8",
+            "modified": 1714386028639,
+            "created": 1711100112951,
+            "url": "{{ _.baseUrl }}/users",
+            "name": "Update",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"password\" : \"abc12345sdfs\",\n\t\"phone\" : \"3198394844\",\n\t\"userId\" : \"cf43d66a-f7e3-4aee-893d-373245825a2c\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710732172605,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_8722eb1be7f34468ac511f45b8e18cf0",
+            "parentId": "fld_93619e40f30f419eb19f0c79ae0d08d8",
+            "modified": 1714320095798,
+            "created": 1711100112945,
+            "url": "{{ _.baseUrl }}/users",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\" : \"Pablo Santana\",\n\t\"email\" : \"pablo.test322@gmail.com\",\n\t\"phone\" : \"31945776633\",\n\t\"cpf\" : \"222.614.670-33\",\n\t\"password\" : \"abc123\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b4011f818a0844b4912dd24a6d044f1e",
+            "parentId": "fld_ccca1af6298549ca925df79c38b6e324",
+            "modified": 1712930035061,
+            "created": 1711056273782,
+            "url": "{{ _.baseUrl }}/tutors",
+            "name": "Delete",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"tutorId\" : \"6a56d870-2005-4231-aad1-6d3d988ea235\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710120021421,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_ccca1af6298549ca925df79c38b6e324",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711056273780,
+            "created": 1711056273780,
+            "name": "Tutors",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1706428964957.5,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_992a278ff48646358b7cd5f1716b8d6a",
+            "parentId": "fld_ccca1af6298549ca925df79c38b6e324",
+            "modified": 1712929274102,
+            "created": 1711056273783,
+            "url": "{{ _.baseUrl }}/tutors/getUnique",
+            "name": "Get",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"tutorId\" : \"6a56d870-2005-4231-aad1-6d3d988ea235\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710273059217,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_bd6aafb791374031a0ca5e4ea8aabfd4",
+            "parentId": "fld_ccca1af6298549ca925df79c38b6e324",
+            "modified": 1711056323877,
+            "created": 1711056273782,
+            "url": "{{ _.baseUrl }}/tutors",
+            "name": "List",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710426097013,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_67c6243a5569461c80a96672d3e853ed",
+            "parentId": "fld_ccca1af6298549ca925df79c38b6e324",
+            "modified": 1713441190980,
+            "created": 1711056273783,
+            "url": "{{ _.baseUrl }}/tutors/71a9ae41-5b1d-4171-8864-b201008b4d3a",
+            "name": "Update",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n \t\"bio\" : \"Conhecedor Expo Master 3\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710732172605,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b8d71c730d484f7e863203165eebe87e",
+            "parentId": "fld_ccca1af6298549ca925df79c38b6e324",
+            "modified": 1714319548007,
+            "created": 1711056273781,
+            "url": "{{ _.baseUrl }}/tutors",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\" : \"ddfgdfg222i3ui2fii221\",\n\t\"bio\" : \"Especialista em dfgdfgb2\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_2900796f9833414e897ebda69015bb97",
+            "parentId": "fld_c755d60f1c364b778a029a62d8d21fa5",
+            "modified": 1713442200067,
+            "created": 1711046435421,
+            "url": "{{ _.baseUrl }}/modules/48e770c5-eb42-45be-8c28-27a9d0b74784",
+            "name": "Delete",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710120021421,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_c755d60f1c364b778a029a62d8d21fa5",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711046435420,
+            "created": 1711046435420,
+            "name": "Modules",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1707965388258,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_e1deb0487c88449c933d4062985ce078",
+            "parentId": "fld_c755d60f1c364b778a029a62d8d21fa5",
+            "modified": 1713439194806,
+            "created": 1711046435422,
+            "url": "{{ _.baseUrl }}/modules/getUnique/adc6e171-edd4-4d30-8698-d09edfcc811a",
+            "name": "Get",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710273059217,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_ef46da118266495ca8c19a103182b006",
+            "parentId": "fld_c755d60f1c364b778a029a62d8d21fa5",
+            "modified": 1713439699139,
+            "created": 1711046435421,
+            "url": "{{ _.baseUrl }}/modules/1df1961f-7de1-4eec-a89b-e7466e7b889d",
+            "name": "List by course",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710426097013,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_31d86293dda04f478e3b6a8140051f3e",
+            "parentId": "fld_c755d60f1c364b778a029a62d8d21fa5",
+            "modified": 1714319262142,
+            "created": 1711046435422,
+            "url": "{{ _.baseUrl }}/modules/adc6e171-edd4-4d30-8698-d09edfcc811a",
+            "name": "Update",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\" : \"Utilizando Expo 55.0\",\n\t\"duration\" : 3200\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710732172605,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_5a49f8229dc0427b9e7c9ae5c067c2f1",
+            "parentId": "fld_c755d60f1c364b778a029a62d8d21fa5",
+            "modified": 1714319253175,
+            "created": 1711046435420,
+            "url": "{{ _.baseUrl }}/modules",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\" : \"Utilizando Expo 6\",\n\t\"description\" : \"Aprenda a criar aplicações mobile utilizando Expo\",\n\t\"duration\" : 600,\n\t\"cover_url\" : \"https://www.inovex.de/wp-content/uploads/2018/03/react-native.png\",\n\t\"courseId\" : \"1df1961f-7de1-4eec-a89b-e7466e7b889d\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_94516b90870d454e9b43a4981c40fbcb",
+            "parentId": "fld_675e37e65ad343c3a68e978fea898de9",
+            "modified": 1713697232838,
+            "created": 1711058115959,
+            "url": "{{ _.baseUrl }}/classes",
+            "name": "Delete",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"classId\" : \"805f9b50-2402-444e-add4-80147239e48e\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710120021421,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_675e37e65ad343c3a68e978fea898de9",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711058115956,
+            "created": 1711058115956,
+            "name": "Classes",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1709501811558.5,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_0129cd4ece9644068a1e398a838ef48a",
+            "parentId": "fld_675e37e65ad343c3a68e978fea898de9",
+            "modified": 1713695338494,
+            "created": 1711058115959,
+            "url": "{{ _.baseUrl }}/classes/getUnique",
+            "name": "Get",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"classId\" : \"805f9b50-2402-444e-add4-80147239e48e\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710273059217,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_55c3fa4678a141b7bf3b13df19e6409f",
+            "parentId": "fld_675e37e65ad343c3a68e978fea898de9",
+            "modified": 1713612893372,
+            "created": 1713612611770,
+            "url": "{{ _.baseUrl }}/classes/list-by-module/adc6e171-edd4-4d30-8698-d09edfcc811a",
+            "name": "List by module",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710387837564,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_5f98b4d89919414588dabd7698a88a42",
+            "parentId": "fld_675e37e65ad343c3a68e978fea898de9",
+            "modified": 1711058121227,
+            "created": 1711058115958,
+            "url": "{{ _.baseUrl }}/classes",
+            "name": "List",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710426097013,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_0d9bf082554c459bbda74a7e3bb9672a",
+            "parentId": "fld_675e37e65ad343c3a68e978fea898de9",
+            "modified": 1714223770663,
+            "created": 1711058115959,
+            "url": "{{ _.baseUrl }}/classes/8d7627aa-4ae3-42dc-a670-8cd7abd70f9d",
+            "name": "Update",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\" : \"Iniciando no React Native 22\",\n\t\"description\" : \"Aprenda a dar os primeiros passos no universo react native\",\n\t\"url\" : \"https://www.inovex.de/wp-content/uploads/2018/03/react-native.png\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710732172605,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_2d96fc9616504338ab7ef0df0506a753",
+            "parentId": "fld_675e37e65ad343c3a68e978fea898de9",
+            "modified": 1714391694176,
+            "created": 1711058115957,
+            "url": "{{ _.baseUrl }}/classes",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\" : \"Iniciando com Expo 10\",\n\t\"description\" : \"Aprenda instalar e instanciar o Expo\",\n\t\"url\" : \"https://www.inovex.de/wp-content/uploads/2018/03/react-native.png\",\n\t\"duration\" : 4000,\n\t\"tutorId\" : \"71a9ae41-5b1d-4171-8864-b201008b4d3a\",\n\t\"moduleId\" : \"adc6e171-edd4-4d30-8698-d09edfcc811a\",\n\t\"courseId\" : \"1df1961f-7de1-4eec-a89b-e7466e7b889d\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_51e5d96b573146fcb6a0f5f7aa0b229d",
+            "parentId": "fld_422556c26bbe48e5abc4ae5c3b0d71d6",
+            "modified": 1713355849185,
+            "created": 1711039060535,
+            "url": "{{ _.baseUrl }}/courses/a42b517c-36fc-44a3-8a09-26c0580f6db6",
+            "name": "Delete",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "application/json",
+                "text": ""
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710120021421,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_422556c26bbe48e5abc4ae5c3b0d71d6",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711038234859,
+            "created": 1711038234859,
+            "name": "Courses",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1711038234859,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_7b67c27d0cc842e091ef4d8cb16e2d49",
+            "parentId": "fld_422556c26bbe48e5abc4ae5c3b0d71d6",
+            "modified": 1713442228281,
+            "created": 1711042333582,
+            "url": "{{ _.baseUrl }}/courses/getUnique",
+            "name": "Get",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"courseId\" : \"1df1961f-7de1-4eec-a89b-e7466e7b889d\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710273059217,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_654acd9c9a8a4d0f987dd36839d388a9",
+            "parentId": "fld_422556c26bbe48e5abc4ae5c3b0d71d6",
+            "modified": 1714470767344,
+            "created": 1714470767344,
+            "url": "{{ _.baseUrl }}/courses",
+            "name": "List",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710406967288.5,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_8b6ce57c9f0346f393ad8d7358425b0b",
+            "parentId": "fld_422556c26bbe48e5abc4ae5c3b0d71d6",
+            "modified": 1714318872115,
+            "created": 1711040938997,
+            "url": "{{ _.baseUrl }}/courses/8f393295-bd44-4377-bf57-7324075b6553",
+            "name": "Update",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\" : \"Curso de React Native Prime 44\",\n\t\"description\" : \"Aprenda a criar aplicações mobile prime 4\",\n\t\"cover_url\" : \"https://www.inovex.de/wp-content/uploads/2018/03/react-native.png\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1710732172605,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_d5ec7c69ac52440fb42343edd94f8f84",
+            "parentId": "fld_422556c26bbe48e5abc4ae5c3b0d71d6",
+            "modified": 1714318798347,
+            "created": 1711025753184,
+            "url": "{{ _.baseUrl }}/courses",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"name\" : \"Curso de React Premium 22\",\n\t\"description\" : \"Aprenda a criar aplicações web\",\n\t\"duration\" : 2400,\n\t\"cover_url\" : \"https://www.inovex.de/wp-content/uploads/2018/03/react-native.png\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1711038248197,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_bcba4fcb480945a2aace2abd43fc1fb7",
+            "parentId": "fld_8720cff706d547cb968481467a3a87c1",
+            "modified": 1714471165172,
+            "created": 1714469383831,
+            "url": "{{ _.baseUrl }}/certificates",
+            "name": "Create",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"userId\" : \"cf43d66a-f7e3-4aee-893d-373245825a2c\",\n\t\"courseId\" : \"864b3747-effb-43ed-b67a-0104a8ed294d\",\n\t\"certificate_url\" : \"https://www.google.com/search?safe=on&sca_esv=e99de710a118b989&sca_upv=1&sxsrf=ACQVn08m9j7ylxeLCTCT0VaX_Xcr-7Aa7Q:1714469601016&q=certificado+de+conclus%C3%A3o&uds=AMwkrPuZEEYOQGvdGWHwKmSXATPGOW9UOPG09QAvCXcu2GOTXrOt-MpsGFdfQYG2-49mzkj3YU5IDuE1rDVeyda8BZbViJxSj0l7NyEVf2Oer1XxU5EqYrTV1Nh2l-JltBxnzylLKBPh_5DTM9rkvS5cXD3Qn3WfdIPcZcKw1KcQ8zFQig-vip1iPdVgRD8E23StEQ1PhJkYxpyCT7seZJFL8ljsrLo7UOZKi79MNtHMjwpEepnhW7Z0HZ3njIrEGzA0TB6jTSHpyzLUktWL6lxdSvPUlgMsvvLqvec2Lt4lKZGkQJnXoacFZ6g33LJ1zy1hXBQEEDpg&udm=2&prmd=ivsnmbtz&sa=X&ved=2ahUKEwiswa_80OmFAxWnrZUCHSrXA5AQtKgLegQIFBAB&biw=2101&bih=939&dpr=1#vhid=3D38As_U3NkyMM&vssid=mosaic\"\n}"
+            },
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/9.0.0"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1714469402575,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_8720cff706d547cb968481467a3a87c1",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1714469395756,
+            "created": 1714469395756,
+            "name": "Certificates",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1714469395756,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_d95e7713000941c7aa0f492f188c8ed6",
+            "parentId": "fld_8720cff706d547cb968481467a3a87c1",
+            "modified": 1714471988179,
+            "created": 1714471606814,
+            "url": "{{ _.baseUrl }}/certificates/ee5495b2-6b6a-4cb0-9c47-b2f091e91caa",
+            "name": "Get",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1714469402600,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_95b71e0aab7841eeba0cf2400f970e0e",
+            "parentId": "fld_8720cff706d547cb968481467a3a87c1",
+            "modified": 1714472127156,
+            "created": 1714470892594,
+            "url": "{{ _.baseUrl }}/certificates/list-by-user/c68bf6b9-11d3-4c20-9d1d-265bc57fb40a",
+            "name": "List by user",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1714469402625,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_2c9d36d29054420eb8a9726cf1acfc8c",
+            "parentId": "fld_8720cff706d547cb968481467a3a87c1",
+            "modified": 1714470798225,
+            "created": 1711038264223,
+            "url": "{{ _.baseUrl }}/certificates/list",
+            "name": "List",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "preRequestScript": "",
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.6.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1714469402675,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_df582dc27544cdb23f23bbb5904834e337b6067f",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1714471886418,
+            "created": 1711025749007,
+            "name": "Base Environment",
+            "data": {
+                "baseUrl": "http://localhost:3000"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "baseUrl"
+                ]
+            },
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1711025749007,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_df582dc27544cdb23f23bbb5904834e337b6067f",
+            "parentId": "wrk_44307091086e4654a78362dd7088752e",
+            "modified": 1711025749007,
+            "created": 1711025749007,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "env_c78784ed3d9b4fd4828e4aca579b29d5",
+            "parentId": "env_df582dc27544cdb23f23bbb5904834e337b6067f",
+            "modified": 1714471968968,
+            "created": 1714471921373,
+            "name": "local",
+            "data": {
+                "baseUrl": "http://localhost:3000"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "baseUrl"
+                ]
+            },
+            "color": "#fff70a",
+            "isPrivate": false,
+            "metaSortKey": 1714471921373,
+            "_type": "environment"
+        },
+        {
+            "_id": "env_e99922c768144748b74b5298a425e238",
+            "parentId": "env_df582dc27544cdb23f23bbb5904834e337b6067f",
+            "modified": 1714472105218,
+            "created": 1714472061406,
+            "name": "production",
+            "data": {
+                "baseUrl": "https://www.pablosilvadev.com.br:3000"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "baseUrl"
+                ]
+            },
+            "color": "#0aff81",
+            "isPrivate": false,
+            "metaSortKey": 1714471921423,
+            "_type": "environment"
+        }
+    ]
+}
