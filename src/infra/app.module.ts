@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { CreateAppVersionController } from "./controllers/appVersion/create_app_version";
 import { ListAppVersionsController } from "./controllers/appVersion/list_app_versions";
 import { UpdateAppVersionController } from "./controllers/appVersion/update_app_version";
+import { CreateCertificateController } from "./controllers/certificates/create_certificate";
 import { CreateClassController } from "./controllers/classes/create_class";
 import { DeleteClassController } from "./controllers/classes/delete_class";
 import { GetClassController } from "./controllers/classes/get_class";
@@ -42,6 +43,7 @@ import { FetchClassController } from "./controllers/watchedClasses/fetch_watched
 import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_class";
 import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
 import { AppVersionsRepository } from "./repositories/implementations/appVersionsRepository";
+import { CertificatesRepository } from "./repositories/implementations/certificatesRepository";
 import { ClassesRepository } from "./repositories/implementations/classesRepository";
 import { CommentariesRepository } from "./repositories/implementations/commentariesRepository";
 import { CoursesRepository } from "./repositories/implementations/coursesRepository";
@@ -54,6 +56,7 @@ import { PrismaService } from "./services/prismaService";
 import { CreateAppVersionUseCase } from "./useCases/appVersions/createAppVersionUseCase";
 import { ListAppVersionsUseCase } from "./useCases/appVersions/listAppVersionsUseCase";
 import { UpdateAppVersionUseCase } from "./useCases/appVersions/updateAppVersionUseCase";
+import { CreateCertificateUseCase } from "./useCases/certificates/createCertificateUseCase";
 import { CreateClassUseCase } from "./useCases/classes/createClassUseCase";
 import { DeleteClassUseCase } from "./useCases/classes/deleteClassUseCase";
 import { GetClassUseCase } from "./useCases/classes/getClassUseCase";
@@ -138,6 +141,7 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     GetUserCourseMetricsController,
     ListCommentariesByClassController,
     ListCommentariesByUserController,
+    CreateCertificateController,
   ],
   providers: [
     PrismaService,
@@ -192,6 +196,8 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     CreateAppVersionUseCase,
     ListAppVersionsUseCase,
     UpdateAppVersionUseCase,
+    CertificatesRepository,
+    CreateCertificateUseCase,
   ],
 })
 export class AppModule {}
