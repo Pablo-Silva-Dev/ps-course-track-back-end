@@ -1,4 +1,6 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { AuthModule } from "../auth/auth.module";
 import { CreateAppVersionController } from "./controllers/appVersion/create_app_version";
 import { ListAppVersionsController } from "./controllers/appVersion/list_app_versions";
 import { UpdateAppVersionController } from "./controllers/appVersion/update_app_version";
@@ -29,6 +31,7 @@ import { DeleteModuleController } from "./controllers/modules/delete_module";
 import { GetModuleController } from "./controllers/modules/get_module";
 import { ListModulesController } from "./controllers/modules/list_modules";
 import { UpdateModuleController } from "./controllers/modules/update_module";
+import { AuthenticateUserController } from "./controllers/sessions/authenticate_user_controller";
 import { CreateTutorController } from "./controllers/tutors/create_tutor";
 import { DeleteTutorController } from "./controllers/tutors/delete_tutor";
 import { GetTutorController } from "./controllers/tutors/get_tutor";
@@ -45,6 +48,7 @@ import { UpdateUserController } from "./controllers/users/update_user";
 import { FetchClassController } from "./controllers/watchedClasses/fetch_watched_class";
 import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_class";
 import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
+import { envSchema } from "./env";
 import { AppVersionsRepository } from "./repositories/implementations/appVersionsRepository";
 import { CertificatesRepository } from "./repositories/implementations/certificatesRepository";
 import { ClassesRepository } from "./repositories/implementations/classesRepository";
@@ -103,6 +107,13 @@ import { FetchWatchedClassUseCase } from "./useCases/watchedClasses/fetchClassUs
 import { UnwatchClassUseCase } from "./useCases/watchedClasses/unwatchClass";
 import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
 @Module({
+  imports: [
+    ConfigModule.forRoot({
+      validate: (env) => envSchema.parse(env),
+      isGlobal: true,
+    }),
+    AuthModule,
+  ],
   controllers: [
     CreateCourseController,
     ListCoursesController,
@@ -151,6 +162,7 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     ListCertificatesController,
     ListCertificatesByUserController,
     GetCertificateController,
+    AuthenticateUserController,
   ],
   providers: [
     PrismaService,

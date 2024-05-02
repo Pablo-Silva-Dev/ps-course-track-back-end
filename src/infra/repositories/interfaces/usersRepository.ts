@@ -11,7 +11,7 @@ export interface IUsersRepository {
   }: ICreateUserDTO): Promise<User>;
   listUsers(): Promise<User[]>;
   getUserById(userId: string): Promise<User | void>;
-  getUserByEmail(userId: string): Promise<User | void>;
+  getUserByEmail(userId: string): Promise<User>;
   getUserByCpf(userId: string): Promise<User | void>;
   updateUser(
     userId: string,
