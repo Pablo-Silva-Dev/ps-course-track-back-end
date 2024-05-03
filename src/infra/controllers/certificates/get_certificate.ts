@@ -1,7 +1,9 @@
-import { Controller, Get, HttpCode, Param } from "@nestjs/common";
+import { Controller, Get, HttpCode, Param, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { GetCertificateUseCase } from "src/infra/useCases/certificates/getCertificateUseCase";
 
 @Controller("/certificates")
+@UseGuards(AuthGuard("jwt"))
 export class GetCertificateController {
   constructor(private getCertificateUseCase: GetCertificateUseCase) {}
   @Get(":certificateId")

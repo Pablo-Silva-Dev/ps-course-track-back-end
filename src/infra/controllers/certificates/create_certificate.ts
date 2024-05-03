@@ -4,7 +4,9 @@ import {
   Controller,
   HttpCode,
   Post,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { CreateCertificateUseCase } from "src/infra/useCases/certificates/createCertificateUseCase";
 import { z } from "zod";
 
@@ -17,6 +19,7 @@ const createCertificateBodySchema = z.object({
 type createCertificateBody = z.infer<typeof createCertificateBodySchema>;
 
 @Controller("/certificates")
+@UseGuards(AuthGuard("jwt"))
 export class CreateCertificateController {
   constructor(private createCertificateUseCase: CreateCertificateUseCase) {}
   @Post()
