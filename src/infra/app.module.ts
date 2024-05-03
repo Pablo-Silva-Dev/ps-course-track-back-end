@@ -106,6 +106,8 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
 import { FetchWatchedClassUseCase } from "./useCases/watchedClasses/fetchClassUseCase";
 import { UnwatchClassUseCase } from "./useCases/watchedClasses/unwatchClass";
 import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
+import { SessionsRepository } from "./repositories/implementations/sessionsRepository";
+import { AuthenticateUserUseCase } from "./useCases/sessions/authenticateUserUseCase";
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -222,6 +224,8 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     ListCertificatesUseCase,
     ListCertificatesByUserUseCase,
     GetCertificateUseCase,
+    AuthenticateUserUseCase,
+    SessionsRepository
   ],
 })
 export class AppModule {}
