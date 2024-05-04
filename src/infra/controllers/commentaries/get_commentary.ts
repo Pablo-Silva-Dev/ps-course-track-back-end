@@ -1,7 +1,9 @@
-import { Controller, Get, HttpCode, Param } from "@nestjs/common";
+import { Controller, Get, HttpCode, Param, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { GetCommentaryUseCase } from "src/infra/useCases/commentaries/getCommentary";
 
 @Controller("/commentaries/getUnique")
+@UseGuards(AuthGuard("jwt"))
 export class GetCommentaryController {
   constructor(private getCommentaryUseCase: GetCommentaryUseCase) {}
   @Get(":commentaryId")

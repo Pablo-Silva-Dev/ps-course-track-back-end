@@ -5,7 +5,9 @@ import {
   HttpCode,
   Param,
   Put,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { UpdateModuleUseCase } from "src/infra/useCases/modules/updateModuleUseCase";
 import { z } from "zod";
 
@@ -19,6 +21,7 @@ const updateModuleBodySchema = z.object({
 type UpdateModuleBodySchema = z.infer<typeof updateModuleBodySchema>;
 
 @Controller("/modules")
+@UseGuards(AuthGuard("jwt"))
 export class UpdateModuleController {
   constructor(private updateModuleUseCase: UpdateModuleUseCase) {}
   @Put(":moduleId")

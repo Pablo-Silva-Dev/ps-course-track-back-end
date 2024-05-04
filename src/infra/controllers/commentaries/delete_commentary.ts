@@ -1,7 +1,9 @@
-import { Controller, Delete, HttpCode, Param } from "@nestjs/common";
+import { Controller, Delete, HttpCode, Param, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { DeleteCommentaryUseCase } from "src/infra/useCases/commentaries/deleteCommentaryUseCase";
 
 @Controller("/commentaries")
+@UseGuards(AuthGuard("jwt"))
 export class DeleteCommentaryController {
   constructor(private deleteCommentaryUseCase: DeleteCommentaryUseCase) {}
   @Delete(":commentaryId")

@@ -4,7 +4,9 @@ import {
   Controller,
   Delete,
   HttpCode,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { DeleteClassUseCase } from "src/infra/useCases/classes/deleteClassUseCase";
 import { z } from "zod";
 
@@ -15,6 +17,7 @@ const deleteClassBodySchema = z.object({
 type DeleteClassBodySchema = z.infer<typeof deleteClassBodySchema>;
 
 @Controller("/classes")
+@UseGuards(AuthGuard("jwt"))
 export class DeleteClassController {
   constructor(private deleteClassUseCase: DeleteClassUseCase) {}
   @Delete()

@@ -1,7 +1,9 @@
-import { Controller, Get, HttpCode } from "@nestjs/common";
+import { Controller, Get, HttpCode, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { ListTutorsUseCase } from "../../useCases/tutors/listTutorsUseCase";
 
 @Controller("/tutors")
+@UseGuards(AuthGuard("jwt"))
 export class ListTutorsController {
   constructor(private listTutorsUseCase: ListTutorsUseCase) {}
   @Get()

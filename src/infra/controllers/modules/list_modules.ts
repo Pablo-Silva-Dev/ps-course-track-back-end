@@ -4,10 +4,13 @@ import {
   Get,
   HttpCode,
   Param,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { ListModulesUseCase } from "src/infra/useCases/modules/listModulesUseCase";
 
 @Controller("/modules")
+@UseGuards(AuthGuard("jwt"))
 export class ListModulesController {
   constructor(private listModulesUseCase: ListModulesUseCase) {}
   @Get(":courseId")

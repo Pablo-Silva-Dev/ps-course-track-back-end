@@ -4,7 +4,9 @@ import {
   Controller,
   HttpCode,
   Post,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { WatchClassUseCase } from "src/infra/useCases/watchedClasses/watchClassUseCase";
 import { z } from "zod";
 
@@ -16,6 +18,7 @@ const watchClassBodySchema = z.object({
 type WatchClassBodySchema = z.infer<typeof watchClassBodySchema>;
 
 @Controller("watched-classes/watch")
+@UseGuards(AuthGuard("jwt"))
 export class WatchClassesController {
   constructor(private watchClassUseCase: WatchClassUseCase) {}
   @Post()

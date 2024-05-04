@@ -4,7 +4,9 @@ import {
   Controller,
   HttpCode,
   Post,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { GetUserCourseMetricsUseCase } from "src/infra/useCases/userCourseMetrics/getUserCourseMetricsUseCase";
 import { z } from "zod";
 
@@ -18,6 +20,7 @@ type GetUserCourseMetricsBodySchema = z.infer<
 >;
 
 @Controller("/user-course-metrics/get-unique")
+@UseGuards(AuthGuard("jwt"))
 export class GetUserCourseMetricsController {
   constructor(
     private getUserCourseMetricsUseCase: GetUserCourseMetricsUseCase

@@ -4,10 +4,13 @@ import {
   Get,
   HttpCode,
   Param,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { GetModuleUseCase } from "src/infra/useCases/modules/getModuleUseCase";
 
 @Controller("/modules/getUnique")
+@UseGuards(AuthGuard("jwt"))
 export class GetModuleController {
   constructor(private getModuleUseCase: GetModuleUseCase) {}
   @Get(":moduleId")

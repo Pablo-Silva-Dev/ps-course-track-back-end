@@ -4,7 +4,9 @@ import {
   Controller,
   HttpCode,
   Post,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { CreateCommentaryUseCase } from "src/infra/useCases/commentaries/createCommentaryUseCase";
 import { z } from "zod";
 
@@ -18,6 +20,7 @@ const createCommentaryBodySchema = z.object({
 type CreateCommentaryBodySchema = z.infer<typeof createCommentaryBodySchema>;
 
 @Controller("/commentaries")
+@UseGuards(AuthGuard("jwt"))
 export class CreateCommentaryController {
   constructor(private createCommentaryUseCase: CreateCommentaryUseCase) {}
 

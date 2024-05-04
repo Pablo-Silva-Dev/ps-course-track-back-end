@@ -4,10 +4,13 @@ import {
   Get,
   HttpCode,
   Param,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { ListCommentariesByClassUseCase } from "src/infra/useCases/commentaries/listCommentariesByClassUseCase";
 
 @Controller("/commentaries/list-by-class")
+@UseGuards(AuthGuard("jwt"))
 export class ListCommentariesByClassController {
   constructor(
     private listCommentariesByClassUseCase: ListCommentariesByClassUseCase

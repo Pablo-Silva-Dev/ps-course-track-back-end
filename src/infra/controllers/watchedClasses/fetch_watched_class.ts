@@ -1,4 +1,5 @@
-import { Body, Controller, HttpCode, Post } from "@nestjs/common";
+import { Body, Controller, HttpCode, Post, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { z } from "zod";
 import { FetchWatchedClassUseCase } from "../../useCases/watchedClasses/fetchClassUseCase";
 
@@ -10,6 +11,7 @@ const fetchClassBodySchema = z.object({
 type FetchClassBodySchema = z.infer<typeof fetchClassBodySchema>;
 
 @Controller("watched-classes/fetch")
+@UseGuards(AuthGuard("jwt"))
 export class FetchClassController {
   constructor(private fetchWatchedClassUseCase: FetchWatchedClassUseCase) {}
   @Post()

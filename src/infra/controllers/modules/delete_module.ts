@@ -4,10 +4,13 @@ import {
   Delete,
   HttpCode,
   Param,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { DeleteModuleUseCase } from "src/infra/useCases/modules/deleteModuleUseCase";
 
 @Controller("/modules")
+@UseGuards(AuthGuard("jwt"))
 export class DeleteModuleController {
   constructor(private deleteModuleUseCase: DeleteModuleUseCase) {}
   @Delete(":moduleId")

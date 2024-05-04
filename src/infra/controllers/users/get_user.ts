@@ -4,7 +4,9 @@ import {
   Controller,
   Get,
   HttpCode,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { GetUserUseCase } from "src/infra/useCases/users/getUserUseCase";
 import { z } from "zod";
 
@@ -15,6 +17,7 @@ const getUserBodySchema = z.object({
 type GetUserBodySchema = z.infer<typeof getUserBodySchema>;
 
 @Controller("/users/getUnique")
+@UseGuards(AuthGuard("jwt"))
 export class GetUserController {
   constructor(private getUserUseCase: GetUserUseCase) {}
   @Get()
