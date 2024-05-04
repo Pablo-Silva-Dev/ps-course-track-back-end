@@ -46,6 +46,46 @@ export class UsersRepository implements IUsersRepository {
       return user;
     }
   }
+  async createUserAdmin({
+    cpf,
+    email,
+    password,
+    name,
+    phone,
+    isAdmin,
+  }: ICreateUserDTO): Promise<User> {
+    const emailAlreadyExists = await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    const phoneAlreadyExists = await this.prisma.user.findUnique({
+      where: {
+        phone,
+      },
+    });
+
+    const cpfAlreadyExists = await this.prisma.user.findUnique({
+      where: {
+        cpf,
+      },
+    });
+
+    if (!emailAlreadyExists && !phoneAlreadyExists && !cpfAlreadyExists) {
+      const adminUser = await this.prisma.user.create({
+        data: {
+          cpf: cpf,
+          email: email,
+          name: name,
+          password: password,
+          phone: phone,
+          isAdmin: true,
+        },
+      });
+      return adminUser;
+    }
+  }
   async listUsers(): Promise<User[]> {
     const users = await this.prisma.user.findMany({
       include: {

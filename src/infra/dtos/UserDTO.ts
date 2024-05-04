@@ -4,6 +4,7 @@ interface ICreateUserDTO {
   email: string;
   phone: string;
   password: string;
+  isAdmin?: boolean;
 }
 
 interface IUpdateUserDTO {

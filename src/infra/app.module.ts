@@ -40,6 +40,7 @@ import { UpdateTutorController } from "./controllers/tutors/update_tutor";
 import { CreateUserCourseMetricsController } from "./controllers/userCourseMetrics/create_user_course_metrics";
 import { GetUserCourseMetricsController } from "./controllers/userCourseMetrics/get_user_course_metrics";
 import { UpdateUserCourseMetricsController } from "./controllers/userCourseMetrics/update_user_course_metrics";
+import { CreateAdminUserController } from "./controllers/users/create_admin_user";
 import { CreateUserController } from "./controllers/users/create_user";
 import { DeleteUserController } from "./controllers/users/delete_user";
 import { GetUserController } from "./controllers/users/get_user";
@@ -55,6 +56,7 @@ import { ClassesRepository } from "./repositories/implementations/classesReposit
 import { CommentariesRepository } from "./repositories/implementations/commentariesRepository";
 import { CoursesRepository } from "./repositories/implementations/coursesRepository";
 import { ModulesRepository } from "./repositories/implementations/modulesRepository";
+import { SessionsRepository } from "./repositories/implementations/sessionsRepository";
 import { TutorsRepository } from "./repositories/implementations/tutorsRepository";
 import { UserCourseMetricsRepository } from "./repositories/implementations/userCourseMetricsRepository";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
@@ -90,6 +92,7 @@ import { DeleteModuleUseCase } from "./useCases/modules/deleteModuleUseCase";
 import { GetModuleUseCase } from "./useCases/modules/getModuleUseCase";
 import { ListModulesUseCase } from "./useCases/modules/listModulesUseCase";
 import { UpdateModuleUseCase } from "./useCases/modules/updateModuleUseCase";
+import { AuthenticateUserUseCase } from "./useCases/sessions/authenticateUserUseCase";
 import { CreateTutorUseCase } from "./useCases/tutors/createTutorUseCase";
 import { DeleteTutorUseCase } from "./useCases/tutors/deleteTutorUseCase";
 import { GetTutorUseCase } from "./useCases/tutors/getTutorUseCase";
@@ -98,6 +101,7 @@ import { UpdateTutorUseCase } from "./useCases/tutors/updateTutorUseCase";
 import { CreateUserCourseMetricsUseCase } from "./useCases/userCourseMetrics/createUserCourseMetricsUseCase";
 import { GetUserCourseMetricsUseCase } from "./useCases/userCourseMetrics/getUserCourseMetricsUseCase";
 import { UpdateUserCourseMetricsUseCase } from "./useCases/userCourseMetrics/updateUserCourseMetricsUseCase";
+import { CreateAdminUserUseCase } from "./useCases/users/createAdminUserUseCase";
 import { CreateUserUseCase } from "./useCases/users/createUserUseCase";
 import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
@@ -106,8 +110,6 @@ import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
 import { FetchWatchedClassUseCase } from "./useCases/watchedClasses/fetchClassUseCase";
 import { UnwatchClassUseCase } from "./useCases/watchedClasses/unwatchClass";
 import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
-import { SessionsRepository } from "./repositories/implementations/sessionsRepository";
-import { AuthenticateUserUseCase } from "./useCases/sessions/authenticateUserUseCase";
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -165,6 +167,7 @@ import { AuthenticateUserUseCase } from "./useCases/sessions/authenticateUserUse
     ListCertificatesByUserController,
     GetCertificateController,
     AuthenticateUserController,
+    CreateAdminUserController,
   ],
   providers: [
     PrismaService,
@@ -225,7 +228,8 @@ import { AuthenticateUserUseCase } from "./useCases/sessions/authenticateUserUse
     ListCertificatesByUserUseCase,
     GetCertificateUseCase,
     AuthenticateUserUseCase,
-    SessionsRepository
+    SessionsRepository,
+    CreateAdminUserUseCase,
   ],
 })
 export class AppModule {}
