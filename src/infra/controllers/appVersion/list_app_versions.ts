@@ -3,7 +3,7 @@ import { AuthGuard } from "@nestjs/passport";
 import { ListAppVersionsUseCase } from "../../useCases/appVersions/listAppVersionsUseCase";
 
 @Controller("/appVersion/list")
-@UseGuards(AuthGuard("jwt-admin"))
+@UseGuards(AuthGuard("jwt"))
 export class ListAppVersionsController {
   constructor(private listAppVersionsUseCase: ListAppVersionsUseCase) {}
   @Get()

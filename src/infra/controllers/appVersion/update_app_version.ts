@@ -5,7 +5,9 @@ import {
   HttpCode,
   Param,
   Put,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { UpdateAppVersionUseCase } from "src/infra/useCases/appVersions/updateAppVersionUseCase";
 import { z } from "zod";
 
@@ -17,6 +19,7 @@ const updateAppVersionBodySchema = z.object({
 type UpdateAppVersionBodySchema = z.infer<typeof updateAppVersionBodySchema>;
 
 @Controller("/appVersion")
+@UseGuards(AuthGuard("jwt-admin"))
 export class UpdateAppVersionController {
   constructor(private updateAppVersionUseCase: UpdateAppVersionUseCase) {}
   @Put(":appVersionId")

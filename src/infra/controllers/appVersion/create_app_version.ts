@@ -4,7 +4,9 @@ import {
   Controller,
   HttpCode,
   Post,
+  UseGuards,
 } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { z } from "zod";
 import { CreateAppVersionUseCase } from "./../../useCases/appVersions/createAppVersionUseCase";
 
@@ -17,6 +19,7 @@ const createAppVersionBodySchema = z.object({
 type CreateAppVersionBodySchema = z.infer<typeof createAppVersionBodySchema>;
 
 @Controller("/appVersion")
+@UseGuards(AuthGuard("jwt-admin"))
 export class CreateAppVersionController {
   constructor(private createAppVersionUseCase: CreateAppVersionUseCase) {}
   @Post()
