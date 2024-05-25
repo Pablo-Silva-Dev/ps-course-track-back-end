@@ -50,6 +50,7 @@ import { FetchClassController } from "./controllers/watchedClasses/fetch_watched
 import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_class";
 import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
 import { envSchema } from "./env";
+import { AzureBlobStorageProvider } from "./providers/AzureBloStorageProvider";
 import { AppVersionsRepository } from "./repositories/implementations/appVersionsRepository";
 import { CertificatesRepository } from "./repositories/implementations/certificatesRepository";
 import { ClassesRepository } from "./repositories/implementations/classesRepository";
@@ -61,6 +62,7 @@ import { TutorsRepository } from "./repositories/implementations/tutorsRepositor
 import { UserCourseMetricsRepository } from "./repositories/implementations/userCourseMetricsRepository";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { WatchedClassesRepository } from "./repositories/implementations/watchedClassesRepository";
+import { UploadFileService } from "./services/fileUploadService";
 import { PrismaService } from "./services/prismaService";
 import { CreateAppVersionUseCase } from "./useCases/appVersions/createAppVersionUseCase";
 import { ListAppVersionsUseCase } from "./useCases/appVersions/listAppVersionsUseCase";
@@ -171,6 +173,8 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
   ],
   providers: [
     PrismaService,
+    AzureBlobStorageProvider,
+    UploadFileService,
     CreateUserUseCase,
     UsersRepository,
     ListUsersUseCase,

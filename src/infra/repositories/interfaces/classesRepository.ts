@@ -5,6 +5,7 @@ export interface IClassesRepository {
   listClasses(): Promise<Class[]>;
   listClassesByModule(moduleId): Promise<Class[]>;
   getClassById(classId: string): Promise<Class | void>;
+  getClassByName(className: string): Promise<Class | void>;
   updateClass(
     courseId: string,
     { description, name }: Class

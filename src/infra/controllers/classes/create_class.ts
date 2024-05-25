@@ -1,38 +1,39 @@
 import {
-  Body,
   ConflictException,
   Controller,
   HttpCode,
   Post,
+  Req,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { Request } from "express";
+import { ClassesRepository } from "src/infra/repositories/implementations/classesRepository";
+import { UploadFileService } from "src/infra/services/fileUploadService";
 import { CreateClassUseCase } from "src/infra/useCases/classes/createClassUseCase";
-import { z } from "zod";
-
-const createClassBodySchema = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  url: z.string().optional(),
-  duration: z.number().optional(),
-  moduleId: z.string().optional(),
-  tutorId: z.string().optional(),
-  courseId: z.string().optional(),
-});
-
-type CreateClassBodySchema = z.infer<typeof createClassBodySchema>;
 
 @Controller("/classes")
 @UseGuards(AuthGuard("jwt"))
 export class CreateClassController {
-  constructor(private createClassUseCase: CreateClassUseCase) {}
+  constructor(
+    private createClassUseCase: CreateClassUseCase,
+    private classesRepository: ClassesRepository,
+    private uploadFileService: UploadFileService
+  ) {}
   @Post()
   @HttpCode(201)
-  async handle(@Body() body: CreateClassBodySchema) {
-    const { name, description, url, duration, moduleId, tutorId, courseId } =
-      createClassBodySchema.parse(body);
+  @UseInterceptors(FileInterceptor("file"))
+  async handle(@UploadedFile() file: Express.Multer.File, @Req() req: Request) {
+    const { name, description, duration, moduleId, tutorId, courseId } =
+      req.body;
 
-    const isBodyValidated = await createClassBodySchema.safeParse(body);
+    const parsedDuration = parseInt(duration);
+
+    const classAlreadyExists =
+    await this.classesRepository.getClassByName(name);
 
     if (!name) {
       throw new ConflictException("name is required");
@@ -40,10 +41,6 @@ export class CreateClassController {
 
     if (!description) {
       throw new ConflictException("description is required");
-    }
-
-    if (!url) {
-      throw new ConflictException("url is required");
     }
 
     if (!duration) {
@@ -62,21 +59,28 @@ export class CreateClassController {
       throw new ConflictException("courseId is required");
     }
 
-    if (!isBodyValidated) {
+    
+    if (classAlreadyExists) {
       throw new ConflictException(
-        "Invalid request body. Check if all fields are informed."
+        "Already exists a class for the provided name"
       );
     }
+
+    const fileUrl = await this.uploadFileService.uploadFile(
+      file.buffer,
+      file.originalname
+    );
 
     const createdClass = await this.createClassUseCase.execute({
       name,
       description,
-      url,
-      duration,
+      url: fileUrl,
+      duration: parsedDuration,
       moduleId,
       tutorId,
       courseId,
     });
+
     return createdClass;
   }
 }
