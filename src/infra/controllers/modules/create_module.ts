@@ -40,10 +40,6 @@ export class CreateModuleController {
       throw new ConflictException("name is required");
     }
 
-    if (!cover_url) {
-      throw new ConflictException("cover_url is required");
-    }
-
     if (!description) {
       throw new ConflictException("description is required");
     }

@@ -44,7 +44,7 @@ model Module {
   name        String  @unique
   description String
   duration    Int
-  cover_url   String
+  cover_url   String?
   courseId    String
   course      Course  @relation(fields: [courseId], references: [id])
   classes     Class[]

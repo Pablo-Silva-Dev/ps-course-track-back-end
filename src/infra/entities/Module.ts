@@ -6,7 +6,7 @@ export interface Module {
   name: string;
   description: string;
   duration?: number;
-  cover_url: string;
+  cover_url?: string;
   courseId?: string;
   course?: Course;
   classes?: Class[];
