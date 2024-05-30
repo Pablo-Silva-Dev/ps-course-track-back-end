@@ -5,7 +5,7 @@ import { CoursesRepository } from "src/infra/repositories/implementations/course
 export class GetCourseUseCase {
   constructor(private coursesRepository: CoursesRepository) {}
   async execute(courseId: string) {
-    const courses = await this.coursesRepository.getCourseById(courseId);
-    return courses;
+    const course = await this.coursesRepository.getCourseById(courseId);
+    return course;
   }
 }

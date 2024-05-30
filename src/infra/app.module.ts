@@ -63,6 +63,7 @@ import { UserCourseMetricsRepository } from "./repositories/implementations/user
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { WatchedClassesRepository } from "./repositories/implementations/watchedClassesRepository";
 import { UploadFileService } from "./services/fileUploadService";
+import { ManageCertificateService } from "./services/manageCertificateService";
 import { PrismaService } from "./services/prismaService";
 import { CreateAppVersionUseCase } from "./useCases/appVersions/createAppVersionUseCase";
 import { ListAppVersionsUseCase } from "./useCases/appVersions/listAppVersionsUseCase";
@@ -175,6 +176,7 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     PrismaService,
     AzureBlobStorageProvider,
     UploadFileService,
+    ManageCertificateService,
     CreateUserUseCase,
     UsersRepository,
     ListUsersUseCase,
