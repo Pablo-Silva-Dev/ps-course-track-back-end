@@ -1,14 +1,23 @@
 import {
-  Body,
   ConflictException,
   Controller,
   HttpCode,
   Inject,
   Post,
+  Req,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { AuthGuard } from "@nestjs/passport";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { Request } from "express";
+import { TEnv } from "src/infra/env";
+import { CoursesRepository } from "src/infra/repositories/implementations/coursesRepository";
+import { UploadFileService } from "src/infra/services/fileUploadService";
 import { CreateCourseUseCase } from "src/infra/useCases/courses/createCourseUseCase";
+import { formatSlug } from "src/utils/formatSlug";
 import { z } from "zod";
 
 const createCourseBodySchema = z.object({
@@ -18,29 +27,29 @@ const createCourseBodySchema = z.object({
   cover_url: z.string().optional(),
 });
 
-type CreateCourseBodySchema = z.infer<typeof createCourseBodySchema>;
-
 @Controller("/courses")
 @UseGuards(AuthGuard("jwt"))
 export class CreateCourseController {
   constructor(
     @Inject(CreateCourseUseCase)
-    private createCourseUseCase: CreateCourseUseCase
+    private createCourseUseCase: CreateCourseUseCase,
+    private coursesRepository: CoursesRepository,
+    private uploadFileService: UploadFileService,
+    private config: ConfigService<TEnv, true>
   ) {}
+
   @Post()
   @HttpCode(201)
-  async handle(@Body() body: CreateCourseBodySchema) {
-    const { name, cover_url, description, duration } =
-      createCourseBodySchema.parse(body);
+  @UseInterceptors(FileInterceptor("file"))
+  async handle(@UploadedFile() file: Express.Multer.File, @Req() req: Request) {
+    const { name, description, duration } = req.body;
 
-    const isBodyValidated = createCourseBodySchema.safeParse(body);
+    const parsedDuration = parseInt(duration);
+
+    const isBodyValidated = createCourseBodySchema.safeParse(req.body);
 
     if (!name) {
       throw new ConflictException("name is required");
-    }
-
-    if (!cover_url) {
-      throw new ConflictException("cover_url is required");
     }
 
     if (!description) {
@@ -51,17 +60,45 @@ export class CreateCourseController {
       throw new ConflictException("duration is required");
     }
 
+    if (!file) {
+      throw new ConflictException("select a file to upload as cover");
+    }
+
     if (!isBodyValidated) {
       throw new ConflictException(
         "Invalid request body. Check if all fields are informed."
       );
     }
 
+    const courseAlreadyExists =
+      await this.coursesRepository.getCourseByName(name);
+
+    if (courseAlreadyExists) {
+      throw new ConflictException(
+        "Already exists a course for the provided name"
+      );
+    }
+
+    const blobStorageContainerName = this.config.get(
+      "AZURE_BLOB_STORAGE_COURSES_COVERS_CONTAINER_NAME",
+      { infer: true }
+    );
+
+    const fileExtension = file.originalname.split(".")[1];
+
+    const uploadedFile = file
+      ? await this.uploadFileService.uploadFile(
+          file.buffer,
+          formatSlug(name) + "-cover." + fileExtension,
+          blobStorageContainerName
+        )
+      : null;
+
     const createdCourse = await this.createCourseUseCase.execute({
       name,
-      cover_url,
+      cover_url: uploadedFile,
       description,
-      duration,
+      duration: parsedDuration,
     });
     return createdCourse;
   }

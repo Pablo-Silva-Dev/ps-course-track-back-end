@@ -136,7 +136,7 @@ export class ManageCertificateService {
     userName: string
   ) {
     const blobStorageContainerName = this.config.get(
-      "AZURE_BLOB_STORAGE_CONTAINER_NAME",
+      "AZURE_BLOB_STORAGE_CERTIFICATES_CONTAINER_NAME",
       { infer: true }
     );
     const blobClient = this.azureBlobStorageProvider
