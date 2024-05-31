@@ -87,8 +87,8 @@ model Commentary {
 model UserCourse {
   userId   String
   courseId String
-  user     User   @relation(fields: [userId], references: [id])
-  course   Course @relation(fields: [courseId], references: [id])
+  user     User?   @relation(fields: [userId], references: [id])
+  course   Course? @relation(fields: [courseId], references: [id])
 
   @@id([userId, courseId])
 }

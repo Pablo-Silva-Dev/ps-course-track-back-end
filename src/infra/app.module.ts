@@ -46,6 +46,9 @@ import { DeleteUserController } from "./controllers/users/delete_user";
 import { GetUserController } from "./controllers/users/get_user";
 import { ListUsersController } from "./controllers/users/list_users";
 import { UpdateUserController } from "./controllers/users/update_user";
+import { CreateUserCourseController } from "./controllers/usersCourses/create_user_course";
+import { ListUsersCoursesController } from "./controllers/usersCourses/list_users_courses";
+import { ListUsersCoursesByUserController } from "./controllers/usersCourses/list_users_courses_by_user";
 import { FetchClassController } from "./controllers/watchedClasses/fetch_watched_class";
 import { UnwatchClassesController } from "./controllers/watchedClasses/unwatch_class";
 import { WatchClassesController } from "./controllers/watchedClasses/watch_class";
@@ -60,6 +63,7 @@ import { ModulesRepository } from "./repositories/implementations/modulesReposit
 import { SessionsRepository } from "./repositories/implementations/sessionsRepository";
 import { TutorsRepository } from "./repositories/implementations/tutorsRepository";
 import { UserCourseMetricsRepository } from "./repositories/implementations/userCourseMetricsRepository";
+import { UsersCoursesRepository } from "./repositories/implementations/usersCoursesRepository";
 import { UsersRepository } from "./repositories/implementations/usersRepository";
 import { WatchedClassesRepository } from "./repositories/implementations/watchedClassesRepository";
 import { UploadFileService } from "./services/fileUploadService";
@@ -110,6 +114,9 @@ import { DeleteUserUseCase } from "./useCases/users/deleteUserUseCase";
 import { GetUserUseCase } from "./useCases/users/getUserUseCase";
 import { ListUsersUseCase } from "./useCases/users/listUsersUseCase";
 import { UpdateUserUseCase } from "./useCases/users/updateUserUseCase";
+import { CreateUserCourseUseCase } from "./useCases/usersCourses/createUserCourseUseCase";
+import { ListUsersCoursesByUserUseCase } from "./useCases/usersCourses/listUsersCoursesByUserUseCase";
+import { ListUsersCoursesUseCase } from "./useCases/usersCourses/listUsersCoursesUseCase";
 import { FetchWatchedClassUseCase } from "./useCases/watchedClasses/fetchClassUseCase";
 import { UnwatchClassUseCase } from "./useCases/watchedClasses/unwatchClass";
 import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
@@ -171,6 +178,9 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     GetCertificateController,
     AuthenticateUserController,
     CreateAdminUserController,
+    CreateUserCourseController,
+    ListUsersCoursesController,
+    ListUsersCoursesByUserController,
   ],
   providers: [
     PrismaService,
@@ -236,6 +246,10 @@ import { WatchClassUseCase } from "./useCases/watchedClasses/watchClassUseCase";
     AuthenticateUserUseCase,
     SessionsRepository,
     CreateAdminUserUseCase,
+    UsersCoursesRepository,
+    CreateUserCourseUseCase,
+    ListUsersCoursesUseCase,
+    ListUsersCoursesByUserUseCase,
   ],
 })
 export class AppModule {}
