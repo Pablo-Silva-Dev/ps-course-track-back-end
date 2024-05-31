@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
+import { ICreateModuleDTO, IUpdateModuleDTO } from "src/infra/dtos/ModuleDTO";
 import { Module } from "src/infra/entities/Module";
 import { PrismaService } from "src/infra/services/prismaService";
 import { IModulesRepository } from "../interfaces/modulesRepository";
-import { ICreateModuleDTO, IUpdateModuleDTO } from "src/infra/dtos/ModuleDTO";
 
 @Injectable()
 export class ModulesRepository implements IModulesRepository {
@@ -48,10 +48,23 @@ export class ModulesRepository implements IModulesRepository {
     });
     return modules;
   }
+
   async getModuleById(moduleId: string): Promise<void | Module> {
     const module = await this.prisma.module.findUnique({
       where: {
         id: moduleId,
+      },
+    });
+
+    if (module) {
+      return module;
+    }
+  }
+
+  async getModuleByName(moduleName: string): Promise<void | Module> {
+    const module = await this.prisma.module.findFirst({
+      where: {
+        name: moduleName,
       },
     });
 

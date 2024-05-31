@@ -23,7 +23,7 @@ import { z } from "zod";
 const createCourseBodySchema = z.object({
   name: z.string().optional(),
   description: z.string().optional(),
-  duration: z.number().optional(),
+  duration: z.string().optional(),
   cover_url: z.string().optional(),
 });
 
@@ -86,13 +86,11 @@ export class CreateCourseController {
 
     const fileExtension = file.originalname.split(".")[1];
 
-    const uploadedFile = file
-      ? await this.uploadFileService.uploadFile(
-          file.buffer,
-          formatSlug(name) + "-cover." + fileExtension,
-          blobStorageContainerName
-        )
-      : null;
+    const uploadedFile = await this.uploadFileService.uploadFile(
+      file.buffer,
+      formatSlug(name) + "-cover." + fileExtension,
+      blobStorageContainerName
+    );
 
     const createdCourse = await this.createCourseUseCase.execute({
       name,
