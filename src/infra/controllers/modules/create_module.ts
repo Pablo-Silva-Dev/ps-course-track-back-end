@@ -83,7 +83,7 @@ export class CreateModuleController {
       { infer: true }
     );
 
-    const fileExtension = file.originalname.split(".")[1];
+    const fileExtension = file ? file.originalname.split(".")[1] : '';
 
     const uploadedFile = file
       ? await this.uploadFileService.uploadFile(
