@@ -1,0 +1,9 @@
+- Define course duration as nullable and remove it from create course use case.
+- Verify what will happen to another entities when a course is deleted
+- Add to commentary component on mobile the option to remove the comment if the author is the authenticated user
+- Update update module usecase to require name and description instead of name and duration
+- Update user entity to have birthdate
+- Update tutor entity to have birthdate, email and cpf
+- Limit the text length of description on modules, courses, biography and classes entities
+- Remove course duration from create course use case. Let the system calcule ite by itself
+- Add the property price into Course entity
