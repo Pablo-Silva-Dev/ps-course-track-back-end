@@ -23,7 +23,7 @@ export class SessionsRepository implements ISessionsRepository {
     if (user) {
       const isPasswordValid = await compare(password, user.password);
       if (isPasswordValid) {
-        const token = this.jwt.sign({ sub: user.id, isAdmin: user.isAdmin }, { expiresIn: "7d" });
+        const token = this.jwt.sign({ sub: user.id, isAdmin: user.isAdmin }, { expiresIn: "90d" });
         return {
           token,
         };
